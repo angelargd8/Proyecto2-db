@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="pagofkorden_pago" directorySegmentName="seg_0" id="D3A1319D-BEE8-2089-5E6B-C14AC6D378D8">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 02:16:30 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<sourcePk>B6A7B4DF-BC4E-C6B7-BD41-DA14501AC978</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>id_pago</nameOnSource>
+<nameOnTarget>id_pago</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>A489B862-F819-F013-C7B4-03FFBFC0F2A8</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>79A0CFBF-6323-D4A5-6204-E646A9DA6C47</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

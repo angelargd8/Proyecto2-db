@@ -1,0 +1,105 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="79A0CFBF-6323-D4A5-6204-E646A9DA6C47" name="orden_pago">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:42:57 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_pago" id="B7DC2170-7512-1170-9E40-32A92CBD2AC2">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:43:04 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cantidad" id="9A281861-D09E-7479-4271-F0AA086B33DD">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:43:16 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_orden" id="B03C54A6-D5B3-CEC7-65E5-B8CE95ECB7D3">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:43:38 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_pago1" id="42D57186-0DA2-CAD0-54AD-09E75A576F83">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 02:16:30 UTC</createdTime>
+<generatorID>D3A1319D-BEE8-2089-5E6B-C14AC6D378D8</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<referedAttribute>3CC4464A-7C22-932D-4611-6F9AEB715BF9</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_orden1" id="E2E39ADB-4C9D-B486-2830-B33E12EF9591">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 02:16:55 UTC</createdTime>
+<generatorID>B9039DF6-2922-2664-E7CF-511CFBBC9DE9</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<referedAttribute>3753C738-670E-E636-FB95-F381F2F09A67</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="20FDBD90-F21F-FEA6-949B-340AB8AFD88E" name="orden_pago PK">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:49:22 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>B7DC2170-7512-1170-9E40-32A92CBD2AC2</attributeRef>
+<attributeRef>B03C54A6-D5B3-CEC7-65E5-B8CE95ECB7D3</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

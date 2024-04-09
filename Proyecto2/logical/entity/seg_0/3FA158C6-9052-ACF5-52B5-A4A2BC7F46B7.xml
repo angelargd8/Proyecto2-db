@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="3FA158C6-9052-ACF5-52B5-A4A2BC7F46B7" name="mesas_areas">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:29:14 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_area" id="256F0451-920B-7DA9-52D3-BFBEEA6ABF9A">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:29:21 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_mesa" id="2A3DBFCF-549B-3CF6-DD11-D8EFE8CE3BDA">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:29:34 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_area1" id="C54F37FC-77AF-62D1-4F79-FC787F158B47">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:58:33 UTC</createdTime>
+<generatorID>A896B3BF-0753-2AA5-1CD9-95C70E36B408</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<referedAttribute>00D62C84-EF8B-53B8-F047-C8E20BC6FB60</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="066378A3-5391-A239-ADA1-080C8F7B5C4F" name="mesas_areas PK">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:29:47 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>2A3DBFCF-549B-3CF6-DD11-D8EFE8CE3BDA</attributeRef>
+<attributeRef>256F0451-920B-7DA9-52D3-BFBEEA6ABF9A</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

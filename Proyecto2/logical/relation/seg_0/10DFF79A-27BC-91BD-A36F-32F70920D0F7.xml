@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="mesasfkareas" directorySegmentName="seg_0" id="10DFF79A-27BC-91BD-A36F-32F70920D0F7">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 01:59:32 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<identifying>false</identifying>
+<nameOnSource>id_mesa</nameOnSource>
+<nameOnTarget>id_mesa</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>1104020C-7675-EB2A-D19F-2748DBA6F2D1</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>3FA158C6-9052-ACF5-52B5-A4A2BC7F46B7</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

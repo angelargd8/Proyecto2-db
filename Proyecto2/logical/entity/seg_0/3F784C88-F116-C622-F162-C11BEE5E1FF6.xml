@@ -1,0 +1,91 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="3F784C88-F116-C622-F162-C11BEE5E1FF6" name="Areas">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-08 23:27:23 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_area" id="00D62C84-EF8B-53B8-F047-C8E20BC6FB60">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-08 23:27:47 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tipo_area" id="ADAD0C17-7FA5-65C5-051D-C5CD1EAE1B15">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-08 23:28:09 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="fumador" id="00A0CBDE-47EE-DEAF-A19F-59CE72B04567">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-08 23:28:51 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_mesero" id="3B285E34-3C8A-CA02-ABE8-DD450FB986D5">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 02:11:51 UTC</createdTime>
+<generatorID>149CB974-586D-C9D7-EA58-CF20DBC4357D</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<referedAttribute>813B2FA7-4A79-7271-ACC3-40CF2764E841</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="9B9DFC9F-02F8-925C-817F-5A73A7C72EB0" name="Areas PK">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-08 23:28:04 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>00D62C84-EF8B-53B8-F047-C8E20BC6FB60</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

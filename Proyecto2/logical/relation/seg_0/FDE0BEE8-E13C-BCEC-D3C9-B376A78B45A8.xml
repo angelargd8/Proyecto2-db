@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="ordenfkmenu_orden" directorySegmentName="seg_0" id="FDE0BEE8-E13C-BCEC-D3C9-B376A78B45A8">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 02:01:35 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<sourcePk>FD6CD456-6CA1-90A8-4D3B-B74E264E7A51</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>id_orden</nameOnSource>
+<nameOnTarget>id_orden</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>C667E7C1-4E5E-E9C9-FCD9-7A938D967E40</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>44788B5B-6B73-6E2E-AC2C-72914098D140</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

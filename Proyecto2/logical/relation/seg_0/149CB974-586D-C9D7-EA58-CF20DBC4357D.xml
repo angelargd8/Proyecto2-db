@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="meserofkarea" directorySegmentName="seg_0" id="149CB974-586D-C9D7-EA58-CF20DBC4357D">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 02:11:51 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<sourcePk>53685A6E-C294-FE1E-0FF0-22A33BCE11A0</sourcePk>
+<identifying>false</identifying>
+<nameOnSource>id_area</nameOnSource>
+<nameOnTarget>id_area</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>84A2BD01-4DE9-0DE8-0ABB-1F1FE47978E5</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>3F784C88-F116-C622-F162-C11BEE5E1FF6</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>
