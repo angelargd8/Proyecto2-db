@@ -12,8 +12,7 @@ CREATE DATABASE "Restaurante"
 CREATE TABLE areas (
     id_area   INTEGER NOT NULL,
     tipo_area VARCHAR(100) NOT NULL,
-    fumador   CHAR(1) NOT NULL,
-    id_mesero INTEGER NOT NULL
+    fumador   CHAR(1) NOT NULL
 );
 
 ALTER TABLE areas ADD CONSTRAINT areas_pk PRIMARY KEY ( id_area );
@@ -123,7 +122,6 @@ ALTER TABLE pago ADD CONSTRAINT pago_pk PRIMARY KEY ( id_pago );
 CREATE TABLE personal (
     id_personal          INTEGER NOT NULL,
     nombre_personal      VARCHAR(100) NOT NULL,
-    id_queja             INTEGER,
     password             VARCHAR(255) NOT NULL,
     clasificacion            VARCHAR(100) NOT NULL
 );
@@ -185,6 +183,6 @@ ALTER TABLE orden_pago
     ADD CONSTRAINT pagofkorden_pago FOREIGN KEY ( id_pago )
         REFERENCES pago ( id_pago );
 
-ALTER TABLE personal
-    ADD CONSTRAINT quejadkpersonal FOREIGN KEY ( id_queja )
-        REFERENCES quejas ( id_queja );
+ALTER TABLE quejas
+    ADD CONSTRAINT quejadkpersonal FOREIGN KEY ( id_personal )
+        REFERENCES  personal ( id_personal );
