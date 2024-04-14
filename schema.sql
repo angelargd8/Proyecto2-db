@@ -12,8 +12,7 @@ CREATE DATABASE "Restaurante"
 CREATE TABLE areas (
     id_area   INTEGER NOT NULL,
     tipo_area VARCHAR(100) NOT NULL,
-    fumador   CHAR(1) NOT NULL,
-    id_mesero INTEGER NOT NULL
+    fumador   CHAR(1) NOT NULL
 );
 
 ALTER TABLE areas ADD CONSTRAINT areas_pk PRIMARY KEY ( id_area );
