@@ -33,7 +33,8 @@ CREATE TABLE menu (
     nombre_elemento VARCHAR(100) NOT NULL,
     tipo_elemento   VARCHAR(10) NOT NULL,
     descripcion     VARCHAR(200) NOT NULL,
-    precio          NUMERIC NOT NULL
+    precio          NUMERIC NOT NULL,
+    img             VARCHAR(200) NOT NULL
 );
 
 COMMENT ON COLUMN menu.tipo_elemento IS
