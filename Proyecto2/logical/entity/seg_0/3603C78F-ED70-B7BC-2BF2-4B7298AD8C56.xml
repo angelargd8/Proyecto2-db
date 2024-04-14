@@ -43,7 +43,7 @@
 <dataTypeSize>100</dataTypeSize>
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="categoria" id="46311BD9-9E70-7B1B-A3E5-35B72065105F">
+<Attribute name="clasificacion" id="46311BD9-9E70-7B1B-A3E5-35B72065105F">
 <createdBy>Francis</createdBy>
 <createdTime>2024-04-13 23:54:13 UTC</createdTime>
 <ownerDesignName>Proyecto2</ownerDesignName>

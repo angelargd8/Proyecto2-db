@@ -1,0 +1,84 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E26EE1EB-79C3-168E-8566-0F772E65E51B" name="Mesas">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>1104020C-7675-EB2A-D19F-2748DBA6F2D1</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_mesa" id="9D17F213-7991-4092-A1C9-26A63ACBFC47">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>0F742B7A-4536-1844-8789-954F54F20A94</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Capacidad" id="350C464C-00FD-6B27-BA01-54A99D176CAD">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>20307AB1-1573-949D-1F66-000182473C22</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Movibilidad" id="9AA4CF48-B371-00EC-9127-A68FB9707382">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>3992F5B1-80D1-53F0-2FDE-E0AAA8D187E7</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Habilitada" id="5FBECA40-23B0-A549-8760-DD1A7FBE9B85">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>FE69D523-9D32-7640-E962-E714A9EFD5F0</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT006</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="mesas_juntas" id="FC448F47-DA74-190E-FD0D-4C9F5BB3E911">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>4CBF9AA7-AA2A-1992-4096-991C20E80D0A</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="658A067F-D652-0C9C-04E1-9C67270CA12C" name="Mesas_PK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>5FB04CFD-7245-F7AC-CFFE-7AA99F578983</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="9D17F213-7991-4092-A1C9-26A63ACBFC47"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

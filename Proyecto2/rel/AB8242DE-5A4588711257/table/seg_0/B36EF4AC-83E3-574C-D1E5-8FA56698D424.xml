@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B36EF4AC-83E3-574C-D1E5-8FA56698D424" name="Menu">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>57849392-3708-A44E-41BF-48F1788E610C</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_elemento" id="8A8AD082-F67C-7A3A-7FA3-D4D1E452649A">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>0C977FB4-77EC-0F38-513E-385A20279C81</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nombre_elemento" id="51FC37EA-C790-733A-3BD9-4AB164DF20AB">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>EA179A17-95D4-372A-CD2D-2924409E2694</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tipo_elemento" id="85ECC3AD-78FA-6181-5204-4B9DC8E4EC8C">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<commentInRDBMS><![CDATA[Comida o bedida]]></commentInRDBMS>
+<generatorID>68C9D1C1-8B23-BB14-392B-82E135314E8B</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="descripcion" id="DE28C798-6688-3B9E-4B7F-1E1DF663D121">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>3DDD31E1-2B7D-6CB1-EA8F-43FEB72FA036</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>200</dataTypeSize>
+<ownDataTypeParameters>200,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="precio" id="315A5E2F-9179-F9D3-EA94-606AFAEE1E78">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>00D7C9FE-19B5-40C2-C26D-D6507EA7AB62</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8D36A0AD-803E-599F-1B99-A76E1DB9F224" name="Menu_PK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>95D73F3D-1B3F-A8E0-94C1-CE00E0588131</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="8A8AD082-F67C-7A3A-7FA3-D4D1E452649A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
