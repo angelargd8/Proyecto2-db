@@ -94,8 +94,7 @@ CREATE TABLE orden (
     id_mesero      INTEGER NOT NULL,
     nit            VARCHAR(50),
     nombre_nit     VARCHAR(50),
-    direccion      VARCHAR(20),
-    mesas_mesas_id NUMERIC NOT NULL
+    direccion      VARCHAR(20)
 );
 
 ALTER TABLE orden ADD CONSTRAINT orden_pk PRIMARY KEY ( id_orden );
