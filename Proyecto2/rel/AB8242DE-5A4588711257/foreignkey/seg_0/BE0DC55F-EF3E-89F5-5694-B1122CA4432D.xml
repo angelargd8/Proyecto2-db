@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="BE0DC55F-EF3E-89F5-5694-B1122CA4432D" containerWithKeyObject="1CFF5398-D32B-88F7-270C-DFC4719777C5" localFKIndex="EFF76B05-0FFF-4E40-76A0-C0B3B598E2C2" name="Orden_Mesas_FK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>75C3EC9D-D8D7-EDF4-8E0A-0B962E112409</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<referredTableLongName>Mesas</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>E26EE1EB-79C3-168E-8566-0F772E65E51B</referredTableID>
+<keyObject>658A067F-D652-0C9C-04E1-9C67270CA12C</keyObject>
+<referredKeyID>658A067F-D652-0C9C-04E1-9C67270CA12C</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_mesa</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

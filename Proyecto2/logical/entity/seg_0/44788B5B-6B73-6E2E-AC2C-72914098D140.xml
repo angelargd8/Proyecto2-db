@@ -16,32 +16,6 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id_elemento" id="36A40AA4-95A2-91CD-602A-F14162C7B8EE">
-<createdBy>Gerax</createdBy>
-<createdTime>2024-04-09 01:40:35 UTC</createdTime>
-<ownerDesignName>Proyecto2</ownerDesignName>
-<engineerTo>
-<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
-<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="id_orden" id="79A10B4E-23AC-9020-A2E4-15B7347BB796">
-<createdBy>Gerax</createdBy>
-<createdTime>2024-04-09 01:41:03 UTC</createdTime>
-<ownerDesignName>Proyecto2</ownerDesignName>
-<engineerTo>
-<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
-<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="Cantidad" id="EBF350EA-371D-8AFC-FC81-88FEA671E865">
 <createdBy>Gerax</createdBy>
 <createdTime>2024-04-09 01:41:14 UTC</createdTime>
@@ -85,6 +59,33 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="estatus" id="C51A7045-6F1C-3CC6-F65C-BA7F22364BB7">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 04:35:26 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="hora" id="81885FE7-DC2F-E64D-69DB-E751CA02E377">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:48:17 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="77BFFA43-9AB8-F75B-FED4-65736426A80E" name="menu_orden PK">
@@ -97,8 +98,8 @@
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>36A40AA4-95A2-91CD-602A-F14162C7B8EE</attributeRef>
-<attributeRef>79A10B4E-23AC-9020-A2E4-15B7347BB796</attributeRef>
+<attributeRef>746C58C1-AC70-07B1-BC1E-096A68191574</attributeRef>
+<attributeRef>0832714C-0BC8-E2E7-DB4C-20CBE9475378</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

@@ -1,13 +1,13 @@
 import psycopg2
 def conexiones():
     Password1 = "123456"
-    Password2 = "123456" #sus paswords
+    Password2 = "francis123" #francis
     Password3 = "123456"#sus paswords
 
     try:
         conexion= psycopg2.connect(
             host = "localhost",
-            database = "Proyecto1",
+            database = "Restaurante",
             user = "postgres",
             password = Password1, 
             port = "5432" #SELECT * FROM pg_settings WHERE name = 'port';

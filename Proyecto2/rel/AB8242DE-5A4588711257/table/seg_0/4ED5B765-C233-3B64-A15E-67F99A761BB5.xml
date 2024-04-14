@@ -1,0 +1,90 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="4ED5B765-C233-3B64-A15E-67F99A761BB5" name="orden_pago">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>79A0CFBF-6323-D4A5-6204-E646A9DA6C47</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="cantidad" id="9B116ABB-3F61-AD1F-2250-492BCF0FBCED">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>9A281861-D09E-7479-4271-F0AA086B33DD</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Pago_id_pago" id="1DDCB72E-7C7A-2FC4-6DE1-3FE523F4FA26">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>42D57186-0DA2-CAD0-54AD-09E75A576F83</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="AEC27508-452C-7FC2-E6A2-482796F6AD07" referredColumn="C48671F8-2F88-01E5-E6A1-84EC40AB6816"/>
+</associations>
+</Column>
+<Column name="Orden_id_orden" id="5B1455D3-0E50-D38F-2A55-E8586D9FFD56">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>E2E39ADB-4C9D-B486-2830-B33E12EF9591</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0021EA88-13BF-E283-FB25-10ACC4ED4DE8" referredColumn="A26C32AE-28C2-2571-6E27-ADEDCF9AD0B3"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="182B0D10-E94D-4C82-1711-4B0A7E41D7EE" name="orden_pago_PK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>20FDBD90-F21F-FEA6-949B-340AB8AFD88E</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1DDCB72E-7C7A-2FC4-6DE1-3FE523F4FA26"/>
+<colUsage columnID="5B1455D3-0E50-D38F-2A55-E8586D9FFD56"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C982FC58-2906-270D-C3E2-2CCE02474F11" name="orden_pago_Orden_FK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>B9039DF6-2922-2664-E7CF-511CFBBC9DE9</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5B1455D3-0E50-D38F-2A55-E8586D9FFD56"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9A7106A1-C67D-75EE-9F35-3AC15CAAAAF9" name="orden_pago_Pago_FK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>D3A1319D-BEE8-2089-5E6B-C14AC6D378D8</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1DDCB72E-7C7A-2FC4-6DE1-3FE523F4FA26"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

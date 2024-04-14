@@ -16,19 +16,6 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id_pago" id="B7DC2170-7512-1170-9E40-32A92CBD2AC2">
-<createdBy>Gerax</createdBy>
-<createdTime>2024-04-09 01:43:04 UTC</createdTime>
-<ownerDesignName>Proyecto2</ownerDesignName>
-<engineerTo>
-<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
-<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="cantidad" id="9A281861-D09E-7479-4271-F0AA086B33DD">
 <createdBy>Gerax</createdBy>
 <createdTime>2024-04-09 01:43:16 UTC</createdTime>
@@ -40,19 +27,6 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="id_orden" id="B03C54A6-D5B3-CEC7-65E5-B8CE95ECB7D3">
-<createdBy>Gerax</createdBy>
-<createdTime>2024-04-09 01:43:38 UTC</createdTime>
-<ownerDesignName>Proyecto2</ownerDesignName>
-<engineerTo>
-<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
-<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="id_pago1" id="42D57186-0DA2-CAD0-54AD-09E75A576F83">
@@ -97,8 +71,8 @@
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>B7DC2170-7512-1170-9E40-32A92CBD2AC2</attributeRef>
-<attributeRef>B03C54A6-D5B3-CEC7-65E5-B8CE95ECB7D3</attributeRef>
+<attributeRef>42D57186-0DA2-CAD0-54AD-09E75A576F83</attributeRef>
+<attributeRef>E2E39ADB-4C9D-B486-2830-B33E12EF9591</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>

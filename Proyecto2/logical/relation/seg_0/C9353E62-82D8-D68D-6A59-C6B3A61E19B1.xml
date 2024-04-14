@@ -1,22 +1,20 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="mesasfkareas" directorySegmentName="seg_0" id="10DFF79A-27BC-91BD-A36F-32F70920D0F7">
-<createdBy>Gerax</createdBy>
-<createdTime>2024-04-09 01:59:32 UTC</createdTime>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_14" directorySegmentName="seg_0" id="C9353E62-82D8-D68D-6A59-C6B3A61E19B1">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 00:00:59 UTC</createdTime>
 <ownerDesignName>Proyecto2</ownerDesignName>
 <engineerTo>
 <item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
 <item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
 </engineerTo>
-<sourcePk>5FB04CFD-7245-F7AC-CFFE-7AA99F578983</sourcePk>
+<sourcePk>7D167DA9-FF86-DD30-9C3D-EB0509A7719C</sourcePk>
 <identifying>false</identifying>
-<nameOnSource>id_mesa</nameOnSource>
-<nameOnTarget>id_mesa</nameOnTarget>
 <optionalSource>true</optionalSource>
 <optionalTarget>false</optionalTarget>
 <sourceCardinality>1</sourceCardinality>
-<sourceEntity>1104020C-7675-EB2A-D19F-2748DBA6F2D1</sourceEntity>
+<sourceEntity>3603C78F-ED70-B7BC-2BF2-4B7298AD8C56</sourceEntity>
 <targetCardinalityString>*</targetCardinalityString>
-<targetEntity>3FA158C6-9052-ACF5-52B5-A4A2BC7F46B7</targetEntity>
+<targetEntity>27E39594-FAC1-0CED-DC77-22463B848560</targetEntity>
 <transferable>true</transferable>
 <deleteRule>NO ACTION</deleteRule>
 </Relation>

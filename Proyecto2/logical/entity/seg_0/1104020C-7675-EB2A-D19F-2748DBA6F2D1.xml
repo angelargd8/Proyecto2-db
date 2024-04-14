@@ -85,4 +85,19 @@
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="5FB04CFD-7245-F7AC-CFFE-7AA99F578983" name="Mesas PK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 00:01:20 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>0F742B7A-4536-1844-8789-954F54F20A94</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
 </Entity>

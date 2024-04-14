@@ -43,20 +43,19 @@
 <dataTypeSize>100</dataTypeSize>
 <ownDataTypeParameters>100,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_queja" id="C1BFC420-0417-D30E-106D-9803FE44D795">
-<createdBy>Gerax</createdBy>
-<createdTime>2024-04-09 02:18:35 UTC</createdTime>
-<generatorID>1F1EDAE0-8988-E6C8-A16D-89E945D58966</generatorID>
+<Attribute name="clasificacion" id="46311BD9-9E70-7B1B-A3E5-35B72065105F">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-13 23:54:13 UTC</createdTime>
 <ownerDesignName>Proyecto2</ownerDesignName>
 <engineerTo>
 <item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
 <item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
 </engineerTo>
-<referedAttribute>3641AFB0-C598-EBB8-F086-1E1A8E40FFF6</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">

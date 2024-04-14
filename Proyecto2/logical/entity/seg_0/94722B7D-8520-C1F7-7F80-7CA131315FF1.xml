@@ -54,5 +54,20 @@
 <logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="id_mesero" id="58B51C4E-FF09-73D1-AFA5-AA083B13A25A">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-13 23:59:05 UTC</createdTime>
+<generatorID>068B195D-B914-0C7D-178A-0A73ED350ECB</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<referedAttribute>813B2FA7-4A79-7271-ACC3-40CF2764E841</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 </Entity>

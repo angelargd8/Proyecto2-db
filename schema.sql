@@ -12,8 +12,7 @@ CREATE DATABASE "Restaurante"
 CREATE TABLE areas (
     id_area   INTEGER NOT NULL,
     tipo_area VARCHAR(100) NOT NULL,
-    fumador   CHAR(1) NOT NULL,
-    id_mesero INTEGER NOT NULL
+    fumador   CHAR(1) NOT NULL
 );
 
 ALTER TABLE areas ADD CONSTRAINT areas_pk PRIMARY KEY ( id_area );
@@ -34,7 +33,8 @@ CREATE TABLE menu (
     nombre_elemento VARCHAR(100) NOT NULL,
     tipo_elemento   VARCHAR(10) NOT NULL,
     descripcion     VARCHAR(200) NOT NULL,
-    precio          NUMERIC NOT NULL
+    precio          NUMERIC NOT NULL,
+    img             VARCHAR(200) NOT NULL
 );
 
 COMMENT ON COLUMN menu.tipo_elemento IS
@@ -45,7 +45,9 @@ ALTER TABLE menu ADD CONSTRAINT menu_pk PRIMARY KEY ( id_elemento );
 CREATE TABLE menu_orden (
     id_elemento  INTEGER NOT NULL,
     id_orden     INTEGER NOT NULL,
-    cantidad     INTEGER NOT NULL
+    cantidad     INTEGER NOT NULL,
+    estatus      VARCHAR(10) NOT NULL,
+    hora         TIMESTAMP NOT NULL
 );
 
 ALTER TABLE menu_orden ADD CONSTRAINT menu_orden_pk PRIMARY KEY ( id_elemento,
@@ -63,9 +65,7 @@ ALTER TABLE mesas ADD CONSTRAINT mesas_pk PRIMARY KEY ( id_mesa );
 
 CREATE TABLE mesas_areas (
     id_area        INTEGER NOT NULL,
-    id_mesa        INTEGER NOT NULL,
-    id_area1       INTEGER NOT NULL,
-    mesas_mesas_id NUMERIC NOT NULL
+    id_mesa        INTEGER NOT NULL
 );
 
 ALTER TABLE mesas_areas ADD CONSTRAINT mesas_areas_pk PRIMARY KEY ( id_mesa,
@@ -95,7 +95,6 @@ CREATE TABLE orden (
     nit            VARCHAR(50),
     nombre_nit     VARCHAR(50),
     direccion      VARCHAR(20),
-    id_mesero1     INTEGER NOT NULL,
     mesas_mesas_id NUMERIC NOT NULL
 );
 
@@ -123,9 +122,8 @@ ALTER TABLE pago ADD CONSTRAINT pago_pk PRIMARY KEY ( id_pago );
 CREATE TABLE personal (
     id_personal          INTEGER NOT NULL,
     nombre_personal      VARCHAR(100) NOT NULL,
-    id_queja             INTEGER NOT NULL,
-    encuesta_encuesta_id NUMERIC NOT NULL,
-    id_personal1         INTEGER NOT NULL
+    password             VARCHAR(255) NOT NULL,
+    clasificacion            VARCHAR(100) NOT NULL
 );
 
 ALTER TABLE personal ADD CONSTRAINT personal_pk PRIMARY KEY ( id_personal );
@@ -145,9 +143,9 @@ ALTER TABLE mesas_areas
     ADD CONSTRAINT areasfkmesas FOREIGN KEY ( id_area )
         REFERENCES areas ( id_area );
 
-ALTER TABLE personal
-    ADD CONSTRAINT encuestafkpersonal FOREIGN KEY ( id_personal )
-        REFERENCES encuesta ( encuesta_id );
+--ALTER TABLE personal
+--    ADD CONSTRAINT encuestafkpersonal FOREIGN KEY ( id_personal )
+--        REFERENCES encuesta ( encuesta_id );
 
 ALTER TABLE meseros
     ADD CONSTRAINT hierarchy_1 FOREIGN KEY ( id_personal )
@@ -165,9 +163,9 @@ ALTER TABLE orden
     ADD CONSTRAINT mesasfkorden FOREIGN KEY ( id_mesa )
         REFERENCES mesas ( id_mesa );
 
-ALTER TABLE areas
-    ADD CONSTRAINT meserofkarea FOREIGN KEY ( id_mesero )
-        REFERENCES meseros ( id_mesero );
+ALTER TABLE meseros
+    ADD CONSTRAINT meserofkarea FOREIGN KEY ( id_area )
+        REFERENCES areas ( id_area );
 
 ALTER TABLE orden
     ADD CONSTRAINT meserofkorden FOREIGN KEY ( id_mesero )
@@ -185,7 +183,6 @@ ALTER TABLE orden_pago
     ADD CONSTRAINT pagofkorden_pago FOREIGN KEY ( id_pago )
         REFERENCES pago ( id_pago );
 
-ALTER TABLE personal
-    ADD CONSTRAINT quejadkpersonal FOREIGN KEY ( id_queja )
-        REFERENCES quejas ( id_queja );
-
+ALTER TABLE quejas
+    ADD CONSTRAINT quejadkpersonal FOREIGN KEY ( id_personal )
+        REFERENCES  personal ( id_personal );
