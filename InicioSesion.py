@@ -29,13 +29,13 @@ def iniciarSesion(id, contraseña):
     try:
         if id == "" or contraseña == "":
             messagebox.showerror("error","rellene todos los campos")
-            return False 
+            return False, 'None'
         else:
             cursor.execute("select * from personal where id_personal = %s and password = %s", (id, contraseña))
             result = cursor.fetchone()
-            if result == None:
+            if result == None and result== "" :
                 messagebox.showerror("error","usuario o contraseña incorrectos")
-                return False 
+                return False, 'None' 
             else:
                 nombre = result[1]
                 categoria = result[4]
@@ -43,4 +43,4 @@ def iniciarSesion(id, contraseña):
                 return True, categoria
 
     except Exception as msg:
-        messagebox.showerror("error",msg)
+        messagebox.showerror("Error", "No se pudo ingresar, ingrese bien los datos")

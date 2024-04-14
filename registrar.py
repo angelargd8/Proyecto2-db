@@ -2,6 +2,7 @@ import psycopg2
 from tkinter import *
 from tkinter import messagebox
 from conexion import conexiones
+import traceback
 
 #lo que hay que editar del esquema
 """
@@ -26,9 +27,6 @@ ALTER TABLE IF EXISTS public.personal
 
 conexion = conexiones()
 cursor= conexion.cursor()
-id_personal = 10000 
-encuesta = "null"
-id_queja = "null"
 
 def registrar( nombre, contraseña, clasificacion):
     
@@ -37,15 +35,25 @@ def registrar( nombre, contraseña, clasificacion):
             messagebox.showerror("error","rellene todos los campos")
         else:
             clasificacion = clasificacion.lower()
-            if clasificacion != "admin" and clasificacion != "mesero" and clasificacion != "cocinero" and clasificacion != "gerente"  and clasificacion != "recepcionista"  and clasificacion != "administrador"  and clasificacion != "personal":
-                messagebox.showerror("error","la clasificacion es incorrecta")
+            if clasificacion == "admin" or clasificacion == "mesero" or clasificacion == "cocinero" or clasificacion == "gerente"  or clasificacion == "recepcionista"  or clasificacion == "administrador"  or clasificacion == "personal" or clasificacion == "mesera" or clasificacion == "cocinera":
+                resultado = cursor.execute("SELECT COUNT(*) FROM PERSONAL")
+                resultado = cursor.fetchone()
+                id_personal = resultado[0]
+                id_personal += 10000
+                id_personal = str(id_personal)
+                try:
+                    cursor.execute("insert into personal (id_personal, nombre_personal, password, clasificacion) values (%s,%s,%s,%s)", (id_personal, nombre, contraseña, clasificacion))
+                    conexion.commit()
+                    messagebox.showinfo("Atencion!", f"personal registrado y su codigo(id) es: {id_personal}")
+                    return True
+                except Exception as e:
+                    print("Ocurrió un error:", e)
+                    print(traceback.format_exc())
             else:
-                id_personal += 1 
-                cursor.execute("insert into personal (id_personal, nombre_personal, contraseña, clasificacion) values (%s, %s, %s, %s)", (id_personal,nombre, contraseña, clasificacion))
-                conexion.commit()
-                messagebox.showinfo("Atencion!","personal registrado")
+                messagebox.showerror("error","la clasificacion es incorrecta")
+                
 
     except Exception as msg:
-        messagebox.showerror("error",msg)
+        messagebox.showerror("Error", "No se pudo ingresar, ingrese bien los datos")
     
     
