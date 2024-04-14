@@ -64,7 +64,9 @@ class Registrarse(Tk):
         self.e2= Entry(width=35, show="*"); self.e2.place(x=355,y=300)
         self.l3= Label(self, text="ingrese la clasificacion:", font=self.custom_font2, bg="#3c096c", fg="white").place(x=350, y=340)
         self.e3= Entry(width=35); self.e3.place(x=355,y=370)
-        self.btn1= Button(self, text="registrarse", font=("Arial", 15),fg="white" ,width=19, bg="#9d4edd", command=lambda:self.registro(rol)).place(x=355,y=410) 
+        self.l4= Label(self, text="ingrese el id del area (solo si es mesero):", font=self.custom_font2, bg="#3c096c", fg="white").place(x=290, y=410)
+        self.e4= Entry(width=35); self.e4.place(x=355,y=440)
+        self.btn1= Button(self, text="registrarse", font=("Arial", 15),fg="white" ,width=19, bg="#9d4edd", command=lambda:self.registro(rol)).place(x=355,y=480) 
         self.mainloop()
 
 
@@ -72,7 +74,8 @@ class Registrarse(Tk):
         self.nombre =self.e1.get()
         self.contraseña = self.e2.get()
         self.clasificacion = self.e3.get()
-        resultado = registrar(self.nombre, self.contraseña, self.clasificacion)
+        self.id_area = self.e4.get()
+        resultado = registrar(self.nombre, self.contraseña, self.clasificacion,self.id_area)
         if resultado == True:
             self.destroy()
             ventana= MenuPrincipal(rol)

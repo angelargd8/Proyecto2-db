@@ -28,19 +28,27 @@ ALTER TABLE IF EXISTS public.personal
 conexion = conexiones()
 cursor= conexion.cursor()
 
-def registrar( nombre, contraseña, clasificacion):
+def registrar( nombre, contraseña, clasificacion, id_area):
     
     try:
         if nombre == "" or contraseña == "" or clasificacion == "":
             messagebox.showerror("error","rellene todos los campos")
         else:
             clasificacion = clasificacion.lower()
-            if clasificacion == "admin" or clasificacion == "mesero" or clasificacion == "cocinero" or clasificacion == "gerente"  or clasificacion == "recepcionista"  or clasificacion == "administrador"  or clasificacion == "personal" or clasificacion == "mesera" or clasificacion == "cocinera":
+            #baristay sin genero
+            if clasificacion == "admin" or clasificacion == "mesero" or clasificacion == "cocinero" or clasificacion == "gerente"  or clasificacion == "recepcionista"  or clasificacion == "administrador"  or clasificacion == "personal":
                 resultado = cursor.execute("SELECT COUNT(*) FROM PERSONAL")
                 resultado = cursor.fetchone()
                 id_personal = resultado[0]
-                id_personal += 10000
+                id_personal += 1000
                 id_personal = str(id_personal)
+                if clasificacion == "mesero" and id_area != "":
+                    id_mesero = id_personal
+                    tipo = "Mesero"
+                    cursor.execute("insert into meseros (id_personal, id_area, id_mesero, tipo) values (%s,%s,%s,%s)", (id_personal, id_area, id_mesero, tipo))
+                    conexion.commit()
+                    messagebox.showinfo("Atencion!", f"personal registrado y su codigo(id) es: {id_mesero}")
+
                 try:
                     cursor.execute("insert into personal (id_personal, nombre_personal, password, clasificacion) values (%s,%s,%s,%s)", (id_personal, nombre, contraseña, clasificacion))
                     conexion.commit()
