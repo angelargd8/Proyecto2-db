@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="0717F4D3-83AC-0C8F-7032-CBD81167FDB5" containerWithKeyObject="B5A98CF2-1F01-E129-0A8D-D33642CF2F31" localFKIndex="0030005A-6EA7-03A4-39C4-EEAF18B02FD6" name="Encuesta_Meseros_FK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>068B195D-B914-0C7D-178A-0A73ED350ECB</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<referredTableLongName>Meseros</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>2AA5ECF3-947A-2C6E-9912-663A7329B2D3</referredTableID>
+<keyObject>AD800261-1863-9E8B-29E9-B3A644BA6660</keyObject>
+<referredKeyID>AD800261-1863-9E8B-29E9-B3A644BA6660</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_mesero</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

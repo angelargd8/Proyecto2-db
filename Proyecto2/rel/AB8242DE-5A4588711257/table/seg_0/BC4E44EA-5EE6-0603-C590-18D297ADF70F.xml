@@ -1,0 +1,79 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BC4E44EA-5EE6-0603-C590-18D297ADF70F" name="mesas_areas">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>3FA158C6-9052-ACF5-52B5-A4A2BC7F46B7</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="Areas_id_area" id="0F878966-71B7-3BA1-330C-987B7C0BBA5E">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>C54F37FC-77AF-62D1-4F79-FC787F158B47</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E9963360-DA7E-1982-36EB-0FDF26D45C49" referredColumn="3F2B5C4D-C833-C2AB-EA26-1409C84D4C6F"/>
+</associations>
+</Column>
+<Column name="Mesas_id_mesa" id="94B4080E-4980-889C-7FA7-0FE0CA55FE56">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>BAF37FDE-1E5F-A158-57C1-A4506A0C804A</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="5497B2F2-90CE-8E86-2663-AABA0D62DC05" referredColumn="9D17F213-7991-4092-A1C9-26A63ACBFC47"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="EE4519DE-210B-E40D-217B-B663BAD87A0A" name="mesas_areas_PK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>066378A3-5391-A239-ADA1-080C8F7B5C4F</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0F878966-71B7-3BA1-330C-987B7C0BBA5E"/>
+<colUsage columnID="94B4080E-4980-889C-7FA7-0FE0CA55FE56"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4038BFA1-61EC-527A-4889-CAE992E75959" name="mesas_areas_Areas_FK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>A896B3BF-0753-2AA5-1CD9-95C70E36B408</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0F878966-71B7-3BA1-330C-987B7C0BBA5E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="41FA7742-D2E0-719F-1304-5F744B642B33" name="mesas_areas_Mesas_FK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>10DFF79A-27BC-91BD-A36F-32F70920D0F7</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="94B4080E-4980-889C-7FA7-0FE0CA55FE56"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

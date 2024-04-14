@@ -45,7 +45,8 @@ CREATE TABLE menu_orden (
     id_elemento  INTEGER NOT NULL,
     id_orden     INTEGER NOT NULL,
     cantidad     INTEGER NOT NULL,
-    estatus    VARCHAR(10) NOT NULL
+    estatus      VARCHAR(10) NOT NULL,
+    hora         TIMESTAMP NOT NULL
 );
 
 ALTER TABLE menu_orden ADD CONSTRAINT menu_orden_pk PRIMARY KEY ( id_elemento,
@@ -94,8 +95,7 @@ CREATE TABLE orden (
     nit            VARCHAR(50),
     nombre_nit     VARCHAR(50),
     direccion      VARCHAR(20),
-    mesas_mesas_id NUMERIC NOT NULL,
-    hora           TIMESTAMP NOT NULL
+    mesas_mesas_id NUMERIC NOT NULL
 );
 
 ALTER TABLE orden ADD CONSTRAINT orden_pk PRIMARY KEY ( id_orden );
@@ -163,9 +163,9 @@ ALTER TABLE orden
     ADD CONSTRAINT mesasfkorden FOREIGN KEY ( id_mesa )
         REFERENCES mesas ( id_mesa );
 
-ALTER TABLE areas
-    ADD CONSTRAINT meserofkarea FOREIGN KEY ( id_mesero )
-        REFERENCES meseros ( id_mesero );
+ALTER TABLE meseros
+    ADD CONSTRAINT meserofkarea FOREIGN KEY ( id_area )
+        REFERENCES areas ( id_area );
 
 ALTER TABLE orden
     ADD CONSTRAINT meserofkorden FOREIGN KEY ( id_mesero )

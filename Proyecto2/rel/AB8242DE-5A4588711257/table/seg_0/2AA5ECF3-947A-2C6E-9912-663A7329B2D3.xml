@@ -1,0 +1,101 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="2AA5ECF3-947A-2C6E-9912-663A7329B2D3" name="Meseros">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>84A2BD01-4DE9-0DE8-0ABB-1F1FE47978E5</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_personal" id="BB2FB991-143D-BDEE-ED47-8F314C5C7BAF">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>48FCD841-2297-FF2C-D3FB-D980FA69FC66</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E5CF5A42-D428-5449-B30C-EC7C22ACEE23" referredColumn="AAA3AC79-B209-7381-3F04-96BCAED89017"/>
+</associations>
+</Column>
+<Column name="id_mesero" id="7AE0011F-EA70-7BD5-4AF8-CB94BB5F9B86">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>813B2FA7-4A79-7271-ACC3-40CF2764E841</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_area" id="AB2C3840-545E-447E-DE9B-0D3BE6CBAE28">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>2E8C49A6-8C89-4830-EF55-E318B9D2B609</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tipo" id="D54DEE45-8914-A8EC-C7FE-4BAAC056D152">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<constraintName>CH_INH_Meseros</constraintName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>7</dataTypeSize>
+<listOfValues>
+<valueDef value="Meseros" description="entity Meseros"/>
+</listOfValues>
+<ownDataTypeParameters>7,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<isDiscriminatorColumn>true</isDiscriminatorColumn>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="63FCD728-0A5B-9F9B-292B-423B3FC5B6A0" name="Meseros_PK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>7D167DA9-FF86-DD30-9C3D-EB0509A7719C</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BB2FB991-143D-BDEE-ED47-8F314C5C7BAF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AD800261-1863-9E8B-29E9-B3A644BA6660" name="Meseros_PKv1">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>53685A6E-C294-FE1E-0FF0-22A33BCE11A0</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7AE0011F-EA70-7BD5-4AF8-CB94BB5F9B86"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1220FDF7-4F13-3B1E-D238-0C38A2EC8CA7" name="Meseros_Personal_FK">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 19:49:37 UTC</createdTime>
+<generatorID>E7EA1CF6-581C-9B46-8D68-A976B0EE1DFD</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BB2FB991-143D-BDEE-ED47-8F314C5C7BAF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>
