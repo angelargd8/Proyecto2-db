@@ -65,8 +65,7 @@ ALTER TABLE mesas ADD CONSTRAINT mesas_pk PRIMARY KEY ( id_mesa );
 
 CREATE TABLE mesas_areas (
     id_area        INTEGER NOT NULL,
-    id_mesa        INTEGER NOT NULL,
-    mesas_mesas_id NUMERIC NOT NULL
+    id_mesa        INTEGER NOT NULL
 );
 
 ALTER TABLE mesas_areas ADD CONSTRAINT mesas_areas_pk PRIMARY KEY ( id_mesa,
