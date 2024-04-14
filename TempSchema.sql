@@ -64,8 +64,7 @@ ALTER TABLE mesas ADD CONSTRAINT mesas_pk PRIMARY KEY ( id_mesa );
 
 CREATE TABLE mesas_areas (
     id_area        INTEGER NOT NULL,
-    id_mesa        INTEGER NOT NULL,
-    mesas_mesas_id NUMERIC NOT NULL
+    id_mesa        INTEGER NOT NULL
 );
 
 ALTER TABLE mesas_areas ADD CONSTRAINT mesas_areas_pk PRIMARY KEY ( id_mesa,
@@ -74,12 +73,10 @@ ALTER TABLE mesas_areas ADD CONSTRAINT mesas_areas_pk PRIMARY KEY ( id_mesa,
 CREATE TABLE meseros (
     id_personal INTEGER NOT NULL,
     id_area     INTEGER,
-    id_mesero   INTEGER NOT NULL,
-    tipo        VARCHAR(7) NOT NULL
+    id_mesero   INTEGER NOT NULL
+    
 );
 
-ALTER TABLE meseros
-    ADD CONSTRAINT ch_inh_meseros CHECK ( tipo IN ( 'Meseros' ) );
 
 ALTER TABLE meseros ADD CONSTRAINT meseros_pk PRIMARY KEY ( id_personal );
 
@@ -95,8 +92,7 @@ CREATE TABLE orden (
     nit            VARCHAR(50),
     nombre_nit     VARCHAR(50),
     direccion      VARCHAR(20),
-    mesas_mesas_id NUMERIC NOT NULL,
-    hora           TIMESTAMP NOT NULL
+    hora           TIMESTAMP NOT NULL   
 );
 
 ALTER TABLE orden ADD CONSTRAINT orden_pk PRIMARY KEY ( id_orden );
@@ -123,12 +119,16 @@ ALTER TABLE pago ADD CONSTRAINT pago_pk PRIMARY KEY ( id_pago );
 CREATE TABLE personal (
     id_personal          INTEGER NOT NULL,
     nombre_personal      VARCHAR(100) NOT NULL,
-    id_queja             INTEGER,
+    id_queja             INTEGER NOT NULL,
+    encuesta_encuesta_id NUMERIC NOT NULL,
     password             VARCHAR(255) NOT NULL,
-    clasificacion            VARCHAR(100) NOT NULL
+    categoria            VARCHAR(100) NOT NULL
 );
 
 ALTER TABLE personal ADD CONSTRAINT personal_pk PRIMARY KEY ( id_personal );
+
+ALTER TABLE meseros
+    ADD CONSTRAINT ch_inh_meseros CHECK ( categoria IN ( 'Meseros' ) );
 
 CREATE TABLE quejas (
     id_personal   INTEGER NOT NULL,
@@ -145,9 +145,9 @@ ALTER TABLE mesas_areas
     ADD CONSTRAINT areasfkmesas FOREIGN KEY ( id_area )
         REFERENCES areas ( id_area );
 
---ALTER TABLE personal
---    ADD CONSTRAINT encuestafkpersonal FOREIGN KEY ( id_personal )
---        REFERENCES encuesta ( encuesta_id );
+ALTER TABLE personal
+    ADD CONSTRAINT encuestafkpersonal FOREIGN KEY ( id_personal )
+        REFERENCES encuesta ( encuesta_id );
 
 ALTER TABLE meseros
     ADD CONSTRAINT hierarchy_1 FOREIGN KEY ( id_personal )
@@ -188,3 +188,4 @@ ALTER TABLE orden_pago
 ALTER TABLE personal
     ADD CONSTRAINT quejadkpersonal FOREIGN KEY ( id_queja )
         REFERENCES quejas ( id_queja );
+

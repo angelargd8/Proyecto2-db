@@ -7,9 +7,9 @@ def conexiones():
     try:
         conexion= psycopg2.connect(
             host = "localhost",
-            database = "Proyecto1",
+            database = "Restaurante",
             user = "postgres",
-            password = Password2, 
+            password = Password1, 
             port = "5432" #SELECT * FROM pg_settings WHERE name = 'port';
         )
         print("conexion exitosa")
