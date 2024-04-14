@@ -38,7 +38,7 @@ def iniciarSesion(id, contraseña):
                 return False, 'None' 
             else:
                 nombre = result[1]
-                categoria = result[4]
+                categoria = result[3]
                 messagebox.showinfo("Bienvenido!", f"Bienvenido {nombre}")
                 return True, categoria
 

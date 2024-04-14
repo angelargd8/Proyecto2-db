@@ -42,18 +42,31 @@ def registrar( nombre, contraseña, clasificacion, id_area):
                 id_personal = resultado[0]
                 id_personal += 1000
                 id_personal = str(id_personal)
-                if clasificacion == "mesero" and id_area != "":
-                    id_mesero = id_personal
-                    tipo = "Mesero"
-                    cursor.execute("insert into meseros (id_personal, id_area, id_mesero, tipo) values (%s,%s,%s,%s)", (id_personal, id_area, id_mesero, tipo))
-                    conexion.commit()
-                    messagebox.showinfo("Atencion!", f"personal registrado y su codigo(id) es: {id_mesero}")
+                
 
                 try:
                     cursor.execute("insert into personal (id_personal, nombre_personal, password, clasificacion) values (%s,%s,%s,%s)", (id_personal, nombre, contraseña, clasificacion))
                     conexion.commit()
                     messagebox.showinfo("Atencion!", f"personal registrado y su codigo(id) es: {id_personal}")
+                    if clasificacion == "mesero" and id_area != "":
+                        try:
+                            id_mesero = id_personal
+                            id_personal1= id_personal
+                            tipo = "Meseros"
+                            cursor.execute("insert into meseros (id_personal, id_area, id_mesero, tipo) values (%s,%s,%s,%s)", (id_personal1, id_area, id_mesero, tipo))
+                            conexion.commit()
+                            messagebox.showinfo("Atencion!", f"mesero registrado y su codigo(id) es: {id_mesero}")
+                        except Exception as e:
+                            print("Ocurrió un error:", e)
+                            print(traceback.format_exc())
+                    else:
+                        pass
                     return True
+                
+
+
+
+
                 except Exception as e:
                     print("Ocurrió un error:", e)
                     print(traceback.format_exc())
