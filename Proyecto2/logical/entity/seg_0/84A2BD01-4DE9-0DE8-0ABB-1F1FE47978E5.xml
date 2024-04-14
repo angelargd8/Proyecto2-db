@@ -19,6 +19,19 @@
 <generateDiscrimColumn>true</generateDiscrimColumn>
 <discriminatorColumnName>tipo</discriminatorColumnName>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_mesero" id="813B2FA7-4A79-7271-ACC3-40CF2764E841">
+<createdBy>Gerax</createdBy>
+<createdTime>2024-04-09 02:11:07 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 <Attribute name="id_area" id="2E8C49A6-8C89-4830-EF55-E318B9D2B609">
 <createdBy>Gerax</createdBy>
 <createdTime>2024-04-09 01:52:36 UTC</createdTime>
@@ -28,19 +41,6 @@
 <item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="id_mesero" id="813B2FA7-4A79-7271-ACC3-40CF2764E841">
-<createdBy>Gerax</createdBy>
-<createdTime>2024-04-09 02:11:07 UTC</createdTime>
-<ownerDesignName>Proyecto2</ownerDesignName>
-<engineerTo>
-<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
-<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
-</engineerTo>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>

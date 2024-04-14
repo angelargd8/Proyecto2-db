@@ -45,7 +45,8 @@ ALTER TABLE menu ADD CONSTRAINT menu_pk PRIMARY KEY ( id_elemento );
 CREATE TABLE menu_orden (
     id_elemento  INTEGER NOT NULL,
     id_orden     INTEGER NOT NULL,
-    cantidad     INTEGER NOT NULL
+    cantidad     INTEGER NOT NULL,
+    estatus    VARCHAR(10) NOT NULL,
 );
 
 ALTER TABLE menu_orden ADD CONSTRAINT menu_orden_pk PRIMARY KEY ( id_elemento,
@@ -64,8 +65,6 @@ ALTER TABLE mesas ADD CONSTRAINT mesas_pk PRIMARY KEY ( id_mesa );
 CREATE TABLE mesas_areas (
     id_area        INTEGER NOT NULL,
     id_mesa        INTEGER NOT NULL,
-    id_area1       INTEGER NOT NULL,
-    mesas_mesas_id NUMERIC NOT NULL
 );
 
 ALTER TABLE mesas_areas ADD CONSTRAINT mesas_areas_pk PRIMARY KEY ( id_mesa,
@@ -75,7 +74,7 @@ CREATE TABLE meseros (
     id_personal INTEGER NOT NULL,
     id_area     INTEGER,
     id_mesero   INTEGER NOT NULL,
-    tipo        VARCHAR(7) NOT NULL
+    
 );
 
 ALTER TABLE meseros
@@ -95,8 +94,7 @@ CREATE TABLE orden (
     nit            VARCHAR(50),
     nombre_nit     VARCHAR(50),
     direccion      VARCHAR(20),
-    id_mesero1     INTEGER NOT NULL,
-    mesas_mesas_id NUMERIC NOT NULL
+    hora           DATETIME NOT NULL   
 );
 
 ALTER TABLE orden ADD CONSTRAINT orden_pk PRIMARY KEY ( id_orden );
@@ -125,7 +123,7 @@ CREATE TABLE personal (
     nombre_personal      VARCHAR(100) NOT NULL,
     id_queja             INTEGER NOT NULL,
     encuesta_encuesta_id NUMERIC NOT NULL,
-    id_personal1         INTEGER NOT NULL
+    categoria            VARCHAR(100) NOT NULL
 );
 
 ALTER TABLE personal ADD CONSTRAINT personal_pk PRIMARY KEY ( id_personal );

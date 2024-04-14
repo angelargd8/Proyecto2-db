@@ -157,6 +157,34 @@
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="hora" id="2680DE5D-CB97-15CB-DF7E-741F6200ACF7">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-13 23:59:39 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_mesa1" id="516FC10D-A115-747C-004E-961A4D2CD7B9">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 00:01:21 UTC</createdTime>
+<generatorID>75C3EC9D-D8D7-EDF4-8E0A-0B962E112409</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<referedAttribute>0F742B7A-4536-1844-8789-954F54F20A94</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="FD6CD456-6CA1-90A8-4D3B-B74E264E7A51" name="Orden PK">

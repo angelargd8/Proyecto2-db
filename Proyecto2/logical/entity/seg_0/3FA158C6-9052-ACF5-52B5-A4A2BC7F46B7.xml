@@ -16,32 +16,6 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id_area" id="256F0451-920B-7DA9-52D3-BFBEEA6ABF9A">
-<createdBy>Gerax</createdBy>
-<createdTime>2024-04-09 01:29:21 UTC</createdTime>
-<ownerDesignName>Proyecto2</ownerDesignName>
-<engineerTo>
-<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
-<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="id_mesa" id="2A3DBFCF-549B-3CF6-DD11-D8EFE8CE3BDA">
-<createdBy>Gerax</createdBy>
-<createdTime>2024-04-09 01:29:34 UTC</createdTime>
-<ownerDesignName>Proyecto2</ownerDesignName>
-<engineerTo>
-<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
-<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
 <Attribute name="id_area1" id="C54F37FC-77AF-62D1-4F79-FC787F158B47">
 <createdBy>Gerax</createdBy>
 <createdTime>2024-04-09 01:58:33 UTC</createdTime>
@@ -52,6 +26,21 @@
 <item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
 </engineerTo>
 <referedAttribute>00D62C84-EF8B-53B8-F047-C8E20BC6FB60</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_mesa1" id="BAF37FDE-1E5F-A158-57C1-A4506A0C804A">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-14 00:01:21 UTC</createdTime>
+<generatorID>10DFF79A-27BC-91BD-A36F-32F70920D0F7</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<referedAttribute>0F742B7A-4536-1844-8789-954F54F20A94</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
@@ -69,8 +58,8 @@
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>2A3DBFCF-549B-3CF6-DD11-D8EFE8CE3BDA</attributeRef>
-<attributeRef>256F0451-920B-7DA9-52D3-BFBEEA6ABF9A</attributeRef>
+<attributeRef>C54F37FC-77AF-62D1-4F79-FC787F158B47</attributeRef>
+<attributeRef>BAF37FDE-1E5F-A158-57C1-A4506A0C804A</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>
