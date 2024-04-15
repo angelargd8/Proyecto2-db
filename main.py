@@ -308,6 +308,7 @@ class MenuPrincipal(Tk):
         
         if NoOrden == 1: # primera vez que se crea 
             self.vent.title("Crear orden")
+            self.text3.config(state = DISABLED)
             Button(self.vent, text="Guardar Orden", command=lambda  j=j,i=i:self.crear_orden(j,i)).place(x=300, y=320)
             Button(self.vent, text="Cancelar", command=lambda  j=j,i=i,ventana = self.vent:self.cerrar_pedido(j,i,self.vent)).place(x=150, y=320)
         else:
@@ -315,6 +316,8 @@ class MenuPrincipal(Tk):
             orden = self.ordenesactuales[j][i]
             Label(self.vent, width=10,text=str(orden)).place(x=150, y=50)
             # print(orden)
+            self.text3.insert(INSERT, pedidos.listadoOrden(orden))
+            self.text3.config(state = DISABLED)
             info = pedidos.ordenEspecifica(orden)
             self.MeseroEntry.insert(0, info[2])
             self.Cantidad_personas.insert(0, info[3])
@@ -377,15 +380,12 @@ class MenuPrincipal(Tk):
 
 
     def apacharMenu(self, idElemento,j,i):
-        print(f"Elemento Apachado: {idElemento}")
-        print(f"Orden {self.ordenesactuales[j][i]}")
+        # print(f"Elemento Apachado: {idElemento}")
+        # print(f"Orden {self.ordenesactuales[j][i]}")
+        pedidos.añadirPedido(idElemento, self.ordenesactuales[j][i])
+        self.text3.delete(1.0, END)
+        self.text3.insert(INSERT, pedidos.listadoOrden(self.ordenesactuales[j][i]))
    
-
-    def modificar_orden(self,j,i): # cuando se quiere tomar la orden de un cliente, agregar comidas y bebidas
-        # se debe de validar que la cuenta este abierta 
-        pass
-        
-        # informacion de orden 
 
        
     def cerrar_pedido(self,j,i, ventana): # se cierra la cuenta y se genera factura, ya no se pueden hacer modificaciones
@@ -393,7 +393,6 @@ class MenuPrincipal(Tk):
         self.ordenesactuales[j][i] = 0 # borra la orden de la mesa
         self.ordenes[j][i].config(text="Agregar Orden ")
         ventana.destroy()
-        
     
         
         self.mainloop()
