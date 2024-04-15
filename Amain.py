@@ -13,6 +13,9 @@ from PIL import Image, ImageTk
 #-----------------------------------------------------------------
 from ImpresionFactura import impresionFactura
 #-----------------------------------------------------------------
+from Reporte1y2 import Reporte
+#quejas
+from quejas import InsertarQueja
 #conexion
 conexion = conexiones()
 #uso de cursor
@@ -20,6 +23,13 @@ cursor= conexion.cursor()
 
 Cocina = Pantallas(cursor, conexion, 'comida')
 Bar = Pantallas(cursor, conexion,'bebida')
+Reporte1 = Reporte(conexion,cursor,'''SELECT nombre_elemento, COUNT(*) AS numero_pedidos
+FROM menu_orden mo
+inner join menu m on (mo.id_elemento = m.id_elemento)
+WHERE date(hora) BETWEEN 'fecha_inicio' AND 'fecha_fin'
+AND estatus = 'entregada'
+GROUP BY nombre_elemento
+ORDER BY numero_pedidos DESC;''', "Platos mas pedidos en un rango de fechas")
 
 #clase
 class Forma(Tk):
@@ -128,6 +138,9 @@ class MenuPrincipal(Tk):
         #-----------------------------------------------------------------
         self.tab4=ttk.Frame(self.notebook,style='TFrame.TFrame')
         self.tab5= ttk.Frame(self.notebook,style='TFrame.TFrame')
+        #quejas
+        self.tab6=ttk.Frame(self.notebook)
+        self.tab6= ttk.Frame(self.notebook,style='TFrame.TFrame')
         #-----------------------------------------------------------------
 
 
@@ -137,6 +150,8 @@ class MenuPrincipal(Tk):
         #-----------------------------------------------------------------
         self.notebook.add(self.tab4, text="Impresion factura")
         self.notebook.add(self.tab5, text="Reportes")
+        #quejas
+        self.notebook.add(self.tab6, text="Quejas")
     
         self.mostrar_objetos(rol)
 
@@ -152,13 +167,48 @@ class MenuPrincipal(Tk):
             self.registrar_miembros(rol)
             self.salir()
             self.crear_tab4()
-            self.crear_tab5()
+            #quejas
+            self.crear_tab6()
         elif rol == "gerente":
             self.salir()
         elif rol == "recepcionista":
             self.salir()
         elif rol == "personal":
             self.salir()
+
+    #quejas
+    def crear_tab6(self):
+        self.l1= Label(self.tab6, text="Quejas", font=self.custom_font, bg="#3c096c", fg="white").place(x=20, y=20)
+        Button(self.tab6, text="Ingresar queja", font=("Arial", 9),fg="white" ,width=19, bg="#9d4edd", command=lambda:self.insertar_queja()).place(x=480,y=85) 
+        self.base_font = font.Font(family="Helvetica", size=30, weight="normal", slant="roman")
+        self.custom_font3 = self.base_font.copy()
+        self.custom_font3.configure(size=10, weight="bold") #underline=1
+        #id_personal, motivo, id_queja, fecha, hora, clasificacion
+        self.l5= Label(self.tab6, text="Ingrese el id del personal:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=90)
+        self.q1= Entry(self.tab6,width=35); self.q1.place(x=200,y=90)
+        Label(self.tab6, text="Ingrese el motivo:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=140)
+        self.q2= Entry(self.tab6,width=35); self.q2.place(x=200,y=140)
+        Label(self.tab6, text="Ingrese la fecha:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=180)
+        self.q3= Entry(self.tab6,width=35); self.q3.place(x=200,y=180)
+        Label(self.tab6, text="Ingrese la hora:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=220)
+        self.q4= Entry(self.tab6,width=35); self.q4.place(x=200,y=220)
+        Label(self.tab6, text="Ingrese la clasificacion:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=260)
+        self.q5= Entry(self.tab6,width=35); self.q5.place(x=200,y=260)
+        Label(self.tab6, text="Ingrese la id del elemento:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=300)
+        self.q6= Entry(self.tab6,width=35); self.q6.place(x=200,y=300)
+    #quejas
+    def insertar_queja(self):
+        try:
+            self.id_personal =self.q1.get()
+            self.motivo = self.q2.get()
+            self.fecha_temp = self.q3.get()
+            self.fecha= datetime.strptime(self.fecha_temp, '%d/%m/%Y')
+            self.hora = self.q4.get()
+            self.clasificacion = self.q5.get()
+            self.id_elemento = self.q6.get()
+            InsertarQueja(self.id_personal, self.motivo,self.fecha, self.hora, self.clasificacion,  self.id_elemento)
+        except Exception as msg:
+            messagebox.showerror("Error","ingrese bien los datos")
 
     def crear_tab5(self):
         self.l1= Label(self.tab5, text="Reportes", font=self.custom_font, bg="#3c096c", fg="white").place(x=20, y=20)
@@ -178,7 +228,10 @@ class MenuPrincipal(Tk):
         # agregar las pestañas de los salones
         self.pantallas2 = []
         for i in range(5):
-            self.pantallas2.append(ttk.Frame(self.notebook3,style='TFrame.TFrame.TFrame'))
+            if i == 0:
+                self.pantallas2.append(Reporte1.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
+            else:
+                self.pantallas2.append(ttk.Frame(self.notebook3,style='TFrame.TFrame.TFrame'))
             self.notebook3.add(self.pantallas2[i], text=self.reportes[i])
 
         self.base_font = font.Font(family="Helvetica", size=30, weight="normal", slant="roman")
@@ -414,8 +467,6 @@ class MenuPrincipal(Tk):
     def Registrarse(self,rol):
         self.destroy()
         ventana= Registrarse(rol)
-
-
 
 
 
