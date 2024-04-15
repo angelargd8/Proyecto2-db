@@ -119,21 +119,6 @@ class MenuPrincipal(Tk):
         self.mostrar_objetos(rol)
 
 
-    def crear_tab1(self):
-        # ----- tab 1 -------
-        self.l1= Label(self.tab1, text="Mesas", font=self.custom_font, bg="#3c096c", fg="white").place(x=20, y=20)
-        Button(self.tab1, text="Deshabilitar mesa").place(x=250, y=30)
-        for i in range(7):
-            Label(self.tab1, text="Mesa "+str(i+1)).place(x=20, y=100+(i*30))
-        
-        self.ordenes = []
-        for i in range(7):
-            bt1 = Button(self.tab1, text="Agregar Orden "+str(i+1), width=15, background="#3c096c", fg= "white", command=lambda i=i:self.crear_orden(i))
-            bt1.place(x=100, y=95+(i*30))
-            self.ordenes.append(bt1)
-
-        # ordenes[0].config(command=lambda:self.crear_orden(), text=" Orden 1")
-    
 
     def mostrar_objetos(self, rol):
         if rol == "mesero" or rol == "mesera":
@@ -150,34 +135,104 @@ class MenuPrincipal(Tk):
         elif rol == "personal":
             pass
 
+    def crear_tab1(self):
 
-    def crear_orden(self,i): # cuando ingresa un cliente al restaurante se le crea la cuenta
-        self.ordenes[i].config(text="Orden "+str(i+1), command=lambda i=i:self.modificar_orden(i))
+        # ----- tab 1 -------
+        Label(self.tab1, text="Areas", font=self.custom_font, bg="#3c096c", fg="white").place(x=30, y=20)
+        # pestañas para los salones 
+        self.notebook2 = ttk.Notebook(self.tab1)
+        self.notebook2.pack(fill="both", expand="yes")
+        self.notebook2.config(width="700", height="300")
+        self.notebook2.place(x=20,y=80)
+
+    
+        
+        self.pantallas = []
+        self.cantMesas = [4,4,5,4] # se puede sacar del query de la base de datos
+        self.areas = ["Salon 1","Salon 2","Pergola","Terraza"] # se puede sacar del query de la base de datos
+
+        # agregar las pestañas de los salones
+        for i in range(len(self.cantMesas)):
+            self.pantallas.append(ttk.Frame(self.notebook2,style='TFrame.TFrame.TFrame'))
+            self.notebook2.add(self.pantallas[i], text=self.areas[i])
+
+        self.ordenesactuales = []
+        for j in range(len(self.cantMesas)):
+            self.ordeness = []
+            for i in range(self.cantMesas[j]):
+                self.ordeness.append(0)
+            self.ordenesactuales.append(self.ordeness)
+
+
+        self.ordenes = []
+        
+        for j in range(len(self.cantMesas)):
+            Label(self.pantallas[j], text=self.areas[j], font=self.custom_font, bg="#3c096c", fg="white").place(x=30, y=10)
+            self.ordenesS1 = []
+            for i in range(self.cantMesas[j]):
+                Label(self.pantallas[j], text="Mesa "+str(i+1)).place(x=20, y=80+(i*30))
+                
+            for i in range(self.cantMesas[j]):
+                bt1 = Button(self.pantallas[j], text="Agregar Orden ", width=15, background="#3c096c", fg= "white", command=lambda j=j,i=i:self.crear_orden(j,i))
+                bt1.place(x=100, y=75+(i*30))
+                self.ordenesS1.append(bt1)
+
+                
+            self.ordenes.append(self.ordenesS1)
+        # al crear una nueva cuenta se remplaza 
+        self.No_orden_query = 0 # borrar al tener el query 
+        print(self.ordenesactuales)
+        
+    
+    
+    def crear_orden(self,j,i): # cuando ingresa un cliente al restaurante se le crea la cuenta
+        print(j,i)
+        # crear nueva cuenta 
+        # query para obtener el numero de orden con count*
+        self.No_orden_query += 1
+        self.ordenesactuales[j][i] = self.No_orden_query
+        print(self.ordenesactuales)
+
+        self.ordenes[j][i].config(text="Orden "+str(self.No_orden_query)) # se remplaza por el query
         self.vent = Toplevel()
         self.vent.title("Crear orden")
         self.vent.geometry("500x400")
         # informacion de orden 
+        self.pestaña_orden(j,i,1)
+        # query para crear la orden
 
+        # se le pasa 1 cuando se acaba de crear, de lo contrario no se le pasa nada
+   
+    def pestaña_orden(self,j,i, NoOrden=0): # i es el numero de mesa / si no se le pasa el numero, la cuenta ya existe
         Label(self.vent, text="No. Mesa").place(x=50, y=20)
         Label(self.vent,width=10, text = str(i+1)).place(x=150, y=20)
         Label(self.vent, text="No. Orden").place(x=50, y=50)
-        self.text1 = Entry(self.vent,width=10)
-        self.text1.place(x=150, y=50)
+        Label(self.vent, width=10,text=str(self.No_orden_query)).place(x=150, y=50)
+        no_orden = self.No_orden_query
+
         Label(self.vent, text="Mesero").place(x=50, y=80)
         self.text2 = Entry(self.vent,width=10)
         self.text2.place(x=150, y=80)
-        Label(self.vent, text="Hora").place(x=50, y=110)
-        hora = datetime.now().strftime("%H:%M:%S")
-        Label(self.vent,width=10, text = hora).place(x=140, y=110)
-        Label(self.vent, text="Orden").place(x=50, y=140)
+      
+        Label(self.vent, text="Orden").place(x=50, y=110)
         self.text3 = Text(self.vent,width=30, height=10)
-        self.text3.place(x=150, y=140)
-        Button(self.vent, text="Añadir a la orden", command=lambda i=self.text1.get():self.añadir_pedido(self.text1.get())).place(x=200, y=320)
+        self.text3.place(x=150, y=110)
+        # Button(self.vent, text="Añadir a la orden", command=lambda i=self.text1.get():self.añadir_pedido(self.text1.get())).place(x=150, y=320)
+        Button(self.vent, text="Guardar Orden", command=lambda No_orden=no_orden:self.guardar_pedido(no_orden)).place(x=300, y=320)
+        Button(self.vent, text="Cerrar cuenta", command=lambda  j=j,i=i,ventana = self.vent:self.cerrar_pedido(j,i,self.vent)).place(x=400, y=50)
 
 
     def añadir_pedido(self, i): # se añade un pedido a la cuenta
         # print(i)        
         pass
+
+    def guardar_pedido(self,No_orden): # se guarda la cuenta
+        self.vent = Toplevel()
+        self.vent.title("Crear orden")
+        self.vent.geometry("500x400")
+        # informacion de orden 
+        # self.pestaña_orden(i)
+        # query para actualizar la orden
 
     def modificar_orden(self,i): # cuando se quiere tomar la orden de un cliente, agregar comidas y bebidas
         # se debe de validar que la cuenta este abierta 
@@ -186,28 +241,14 @@ class MenuPrincipal(Tk):
         self.vent.geometry("500x400")
         # informacion de orden 
 
-        Label(self.vent, text="No. Mesa").place(x=50, y=20)
-        Label(self.vent,width=10, text = str(i+1)).place(x=150, y=20)
-        Label(self.vent, text="No. Orden").place(x=50, y=50)
-        self.text1 = Text(self.vent,width=10, height=1)
-        self.text1.place(x=150, y=50)
-        Label(self.vent, text="Mesero").place(x=50, y=80)
-        self.text2 = Text(self.vent,width=10, height=1)
-        self.text2.place(x=150, y=80)
-        Label(self.vent, text="Hora").place(x=50, y=110)
-        hora = datetime.now().strftime("%H:%M:%S")
-        Label(self.vent,width=10, text = hora).place(x=140, y=110)
-        Label(self.vent, text="Orden").place(x=50, y=140)
-        self.text3 = Text(self.vent,width=30, height=10)
-        self.text3.place(x=150, y=140)
-
-        Button(self.vent, text="Añadir pedido", command=lambda:self.añadir_pedido()).place(x=200, y=350)
-        Button(self.vent, text="Cerrar cuenta", command=lambda:self.cerrar_pedido()).place(x=350, y=20)
-
-
-    def cerrar_pedido(self): # se cierra la cuenta y se genera factura, ya no se pueden hacer modificaciones
+       
+    def cerrar_pedido(self,j,i, ventana): # se cierra la cuenta y se genera factura, ya no se pueden hacer modificaciones
         # se modifica la cuenta a cerrada
-        pass
+        self.ordenesactuales[j][i] = 0 # borra la orden de la mesa
+        self.ordenes[j][i].config(text="Agregar Orden ")
+        ventana.destroy()
+        
+    
         
         self.mainloop()
 
