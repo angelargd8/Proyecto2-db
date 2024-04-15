@@ -153,3 +153,14 @@ INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (4
 
 INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (7, 4, 1, 'entregada', '2024-04-12 12:00:00');
 INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (6, 4, 1, 'entregada', '2024-04-12 12:00:00');
+
+INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1005, 1, 1, 1, '2024-04-01 12:00:00');
+INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1006, 2, 2, 2, '2024-04-02 12:00:00');
+INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1007, 3, 3, 3, '2024-04-03 12:00:00');
+INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1008, 4, 4, 4, '2024-04-04 12:00:00');
+INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1005, 5, 5, 5, '2024-04-05 12:00:00');
+INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1006, 1, 1, 6, '2024-04-06 12:00:00');
+INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1007, 2, 2, 7, '2024-04-07 12:00:00');
+INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1008, 3, 3, 8, '2024-04-08 12:00:00');
+INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1005, 4, 4, 9, '2024-04-09 12:00:00');
+INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1006, 5, 5, 10, '2024-04-10 12:00:00');
