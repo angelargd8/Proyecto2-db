@@ -26,7 +26,7 @@ CREATE TABLE encuesta (
 
 ALTER TABLE encuesta ADD CONSTRAINT encuesta_pk PRIMARY KEY ( encuesta_id );
 
-ALTER TABLE encuesta ADD CONSTRAINT encuesta_pkv1 UNIQUE ( id_personal );
+--ALTER TABLE encuesta ADD CONSTRAINT encuesta_pkv1 UNIQUE ( id_personal );
 
 CREATE TABLE menu (
     id_elemento     INTEGER NOT NULL,

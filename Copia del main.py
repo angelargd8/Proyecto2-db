@@ -10,9 +10,10 @@ from registrar import registrar
 from InicioSesion import iniciarSesion
 from Pantalla import Pantallas
 from PIL import Image, ImageTk
-#-----------------------------------------------------------------
 from ImpresionFactura import impresionFactura
-#-----------------------------------------------------------------
+#cambios
+from Reporte1y2 import Reporte
+from quejas import InsertarQueja
 #conexion
 conexion = conexiones()
 #uso de cursor
@@ -20,6 +21,42 @@ cursor= conexion.cursor()
 
 Cocina = Pantallas(cursor, conexion, 'comida')
 Bar = Pantallas(cursor, conexion,'bebida')
+#cambios
+Reporte1 = Reporte(conexion,cursor,'''SELECT nombre_elemento, COUNT(*) AS numero_pedidos
+FROM menu_orden mo
+inner join menu m on (mo.id_elemento = m.id_elemento)
+WHERE date(hora) BETWEEN 'fecha_inicio' AND 'fecha_fin'
+AND estatus = 'entregada'
+GROUP BY nombre_elemento
+ORDER BY numero_pedidos DESC;''', "Platos mas pedidos en un rango de fechas","Plato: Numero de pedidos")
+
+Reporte2 = Reporte(conexion,cursor,'''SELECT EXTRACT(HOUR FROM hora) AS hora_pedido, COUNT(*) AS numero_pedidos
+FROM menu_orden
+WHERE hora BETWEEN 'fecha_inicio' AND 'fecha_fin'
+GROUP BY hora_pedido
+ORDER BY numero_pedidos DESC
+LIMIT 1;''',"Horario en el que ingresan mas pedidos","Hora: Numero de pedidos")
+
+Reporte3 = Reporte(conexion,cursor,'''SELECT cant_personas, AVG(EXTRACT(EPOCH FROM (orden_salida - orden_llegada))/3600) as avg_time
+FROM orden
+WHERE orden_llegada BETWEEN 'fecha_inicio' AND 'fecha_fin'
+GROUP BY cant_personas
+ORDER BY cant_personas;''',"Cantidad de personas por tiempo en el que comen","Cantidad Personas: Promedio de tiempo")
+
+Reporte4 = Reporte(conexion, cursor,'''SELECT p.nombre_personal, COUNT(q.id_queja) as num_quejas
+FROM personal p
+JOIN quejas q ON p.id_personal = q.id_personal
+WHERE q.fecha BETWEEN 'fecha_inicio' AND 'fecha_fin'
+GROUP BY p.nombre_personal
+ORDER BY num_quejas DESC;''',"Reporte de quejas por personas","Persona: Numero de Quejas")
+
+Reporte5 = Reporte(conexion, cursor,'''SELECT m.nombre_elemento, COUNT(q.id_queja) AS numero_de_quejas
+FROM quejas q
+JOIN menu m ON q.id_elemento = m.id_elemento
+WHERE q.fecha BETWEEN 'fecha_inicio' AND 'fecha_fin'
+GROUP BY m.nombre_elemento;''',"Reporte de quejas por plato","Plato: Numero de quejas")
+
+
 
 #clase
 class Forma(Tk):
@@ -47,15 +84,18 @@ class Forma(Tk):
 
     def Login(self):
         #validacion del usuario y contraseña
-        self.codigo = str(self.e1.get())
-        self.contraseña = str(self.e2.get())
-        login_resultado1, rol = iniciarSesion(self.codigo, self.contraseña)
-        if login_resultado1== True:
-            self.destroy()
-            ventana= MenuPrincipal(rol)
-        else:
-            messagebox.showerror("Error", "No se pudo ingresar, ingrese bien los datos")
-
+        #cambios
+        try:
+            self.codigo = str(self.e1.get())
+            self.contraseña = str(self.e2.get())
+            login_resultado1, rol = iniciarSesion(self.codigo, self.contraseña)
+            if login_resultado1== True:
+                self.destroy()
+                ventana= MenuPrincipal(rol)
+            else:
+                messagebox.showerror("Error", "No se pudo ingresar, ingrese bien los datos")
+        except Exception as msg:
+            messagebox.showerror("Error","ingrese correctamente los datos")
     
 
 
@@ -83,16 +123,20 @@ class Registrarse(Tk):
 
 
     def registro(self, rol):
-        self.nombre =self.e1.get()
-        self.contraseña = self.e2.get()
-        self.clasificacion = self.e3.get()
-        self.id_area = self.e4.get()
-        resultado = registrar(self.nombre, self.contraseña, self.clasificacion,self.id_area)
-        if resultado == True:
-            self.destroy()
-            ventana= MenuPrincipal(rol)
-        else:
-            messagebox.showerror("Error", "No se pudo registrar")
+    #cambios
+        try:
+            self.nombre =self.e1.get()
+            self.contraseña = self.e2.get()
+            self.clasificacion = self.e3.get()
+            self.id_area = self.e4.get()
+            resultado = registrar(self.nombre, self.contraseña, self.clasificacion,self.id_area)
+            if resultado == True:
+                self.destroy()
+                ventana= MenuPrincipal(rol)
+            else:
+                messagebox.showerror("Error", "No se pudo registrar")
+        except Exception as msg:
+            messagebox.showerror("Error","ingrese correctamente los datos")
 
 
 class MenuPrincipal(Tk):
@@ -127,7 +171,10 @@ class MenuPrincipal(Tk):
         self.tab3=ttk.Frame(self.notebook,style='TFrame.TFrame.TFrame')
         #-----------------------------------------------------------------
         self.tab4=ttk.Frame(self.notebook,style='TFrame.TFrame')
+        #cambios
         self.tab5= ttk.Frame(self.notebook,style='TFrame.TFrame')
+        self.tab6=ttk.Frame(self.notebook)
+        self.tab6= ttk.Frame(self.notebook,style='TFrame.TFrame')
         #-----------------------------------------------------------------
 
 
@@ -136,7 +183,9 @@ class MenuPrincipal(Tk):
         self.notebook.add(Cocina.Cocina(self.notebook,'TFrame.TFrame.TFrame'), text="Cocina")
         #-----------------------------------------------------------------
         self.notebook.add(self.tab4, text="Impresion factura")
+        #cambios
         self.notebook.add(self.tab5, text="Reportes")
+        self.notebook.add(self.tab6, text="Quejas")
     
         self.mostrar_objetos(rol)
 
@@ -152,7 +201,9 @@ class MenuPrincipal(Tk):
             self.registrar_miembros(rol)
             self.salir()
             self.crear_tab4()
+            #cambios
             self.crear_tab5()
+            self.crear_tab6()
         elif rol == "gerente":
             self.salir()
         elif rol == "recepcionista":
@@ -160,44 +211,70 @@ class MenuPrincipal(Tk):
         elif rol == "personal":
             self.salir()
 
+#cambios
+    #quejas
+    def crear_tab6(self):
+        self.l1= Label(self.tab6, text="Quejas", font=self.custom_font, bg="#3c096c", fg="white").place(x=20, y=20)
+        Button(self.tab6, text="Ingresar queja", font=("Arial", 9),fg="white" ,width=19, bg="#9d4edd", command=lambda:self.insertar_queja()).place(x=480,y=85) 
+        self.base_font = font.Font(family="Helvetica", size=30, weight="normal", slant="roman")
+        self.custom_font3 = self.base_font.copy()
+        self.custom_font3.configure(size=10, weight="bold") #underline=1
+        #id_personal, motivo, id_queja, fecha, hora, clasificacion
+        self.l5= Label(self.tab6, text="Ingrese el id del personal:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=90)
+        self.q1= Entry(self.tab6,width=35); self.q1.place(x=200,y=90)
+        Label(self.tab6, text="Ingrese el motivo:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=140)
+        self.q2= Entry(self.tab6,width=35); self.q2.place(x=200,y=140)
+        Label(self.tab6, text="Ingrese la fecha:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=180)
+        self.q3= Entry(self.tab6,width=35); self.q3.place(x=200,y=180)
+        Label(self.tab6, text="Ingrese la hora:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=220)
+        self.q4= Entry(self.tab6,width=35); self.q4.place(x=200,y=220)
+        Label(self.tab6, text="Ingrese la clasificacion:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=260)
+        self.q5= Entry(self.tab6,width=35); self.q5.place(x=200,y=260)
+        Label(self.tab6, text="Ingrese la id del elemento:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=300)
+        self.q6= Entry(self.tab6,width=35); self.q6.place(x=200,y=300)
+    #quejas
+    def insertar_queja(self):
+        try:
+            self.id_personal =self.q1.get()
+            self.motivo = self.q2.get()
+            self.fecha_temp = self.q3.get()
+            self.fecha= datetime.strptime(self.fecha_temp, '%d/%m/%Y')
+            self.hora = self.q4.get()
+            self.clasificacion = self.q5.get()
+            self.id_elemento = self.q6.get()
+            InsertarQueja(self.id_personal, self.motivo,self.fecha, self.hora, self.clasificacion,  self.id_elemento)
+        except Exception as msg:
+            messagebox.showerror("Error","ingrese bien los datos")
+
     def crear_tab5(self):
         self.l1= Label(self.tab5, text="Reportes", font=self.custom_font, bg="#3c096c", fg="white").place(x=20, y=20)
-        Button(self.tab5, text="1", font=("Arial", 9),fg="white" ,width=10, bg="#9d4edd", command=lambda:self.a()).place(x=20,y=85) 
-        Button(self.tab5, text="2", font=("Arial", 9),fg="white" ,width=10, bg="#9d4edd", command=lambda:self.b()).place(x=120,y=85) 
-        Button(self.tab5, text="3", font=("Arial", 9),fg="white" ,width=10, bg="#9d4edd", command=lambda:self.c()).place(x=220,y=85) 
-        Button(self.tab5, text="4", font=("Arial", 9),fg="white" ,width=10, bg="#9d4edd", command=lambda:self.d()).place(x=320,y=85) 
-        Button(self.tab5, text="5", font=("Arial", 9),fg="white" ,width=10, bg="#9d4edd", command=lambda:self.e()).place(x=420,y=85) 
-        
         self.notebook3 = ttk.Notebook(self.tab5)
         self.notebook3.pack(fill="both", expand="yes")
         self.notebook3.config(width="700", height="300")
         self.notebook3.place(x=20,y=120)
-
-        self.reportes = ["Reporte 1","Reporte 2","Reporte 3 ","Reporte 4", "Reporte 5"] # se puede sacar del query de la base de datos
+        self.reportes = ["Reporte 1","Reporte 2","Reporte 3 ","Reporte 4", "Reporte 5","Reporte 6"] # se puede sacar del query de la base de datos
 
         # agregar las pestañas de los salones
         self.pantallas2 = []
-        for i in range(5):
-            self.pantallas2.append(ttk.Frame(self.notebook3,style='TFrame.TFrame.TFrame'))
+
+        for i in range(6):
+            if i == 0:
+                self.pantallas2.append(Reporte1.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
+            elif i == 1:
+                self.pantallas2.append(Reporte2.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
+            elif i == 2:
+                self.pantallas2.append(Reporte3.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
+            elif i == 3:
+                self.pantallas2.append(Reporte4.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
+            elif i == 4:
+                self.pantallas2.append(Reporte5.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
+            else:
+                self.pantallas2.append(ttk.Frame(self.notebook3,style='TFrame.TFrame.TFrame'))
             self.notebook3.add(self.pantallas2[i], text=self.reportes[i])
 
         self.base_font = font.Font(family="Helvetica", size=30, weight="normal", slant="roman")
         self.custom_font3 = self.base_font.copy()
         self.custom_font3.configure(size=10, weight="bold") 
-
-
-    def a(self):
-        Label(self.pantallas2[0], text="los platos más pedidos:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=20)
-        Label(self.pantallas2[0], text="Ingrese la primera fecha:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=20)
-        Label(self.pantallas2[0], text="Ingrese la primera fecha:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=20)
-    def b(self):
-        Label(self.pantallas2[1], text="Horario en el que se ingresan más pedidos:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=20)
-    def c(self):
-        Label(self.pantallas2[2], text="Promedio de tiempo en que se tardan los clientes en comer:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=20)
-    def d(self):
-        Label(self.pantallas2[3], text="Reporte de las quejas agrupadas por persona:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=20)
-    def e(self):
-        Label(self.pantallas2[4], text="Reporte de las quejas agrupadas por plato:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=20)
 
 #-----------------------------------------------------------------
     def crear_tab4(self):

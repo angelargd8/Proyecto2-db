@@ -30,6 +30,7 @@ def impresionFactura(id_orden):
     print(id_orden)
     cursor.execute("SELECT * FROM orden WHERE id_orden=%s",(id_orden,))
     orden=cursor.fetchone()
+    print(orden)
     if orden is not None:
         estado=orden[3]
         #print(orden)
