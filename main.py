@@ -8,10 +8,14 @@ from tkinter import messagebox, ttk, PhotoImage, font
 from datetime import datetime
 from registrar import registrar
 from InicioSesion import iniciarSesion
+from Pantalla import Pantallas
 #conexion
 conexion = conexiones()
 #uso de cursor
 cursor= conexion.cursor()
+
+Cocina = Pantallas(cursor, conexion, 'comida')
+Bar = Pantallas(cursor, conexion,'bebida')
 
 #clase
 class Forma(Tk):
@@ -113,8 +117,8 @@ class MenuPrincipal(Tk):
         self.tab3=ttk.Frame(self.notebook,style='TFrame.TFrame.TFrame')
 
         self.notebook.add(self.tab1, text="Pedido")
-        self.notebook.add(self.tab2, text="Bar")
-        self.notebook.add(self.tab3, text="Cocina")
+        self.notebook.add(Bar.Cocina(self.notebook,'TFrame.TFrame.TFrame'), text="Bar")
+        self.notebook.add(Cocina.Cocina(self.notebook,'TFrame.TFrame.TFrame'), text="Cocina")
 
         self.mostrar_objetos(rol)
 
@@ -266,8 +270,9 @@ class MenuPrincipal(Tk):
 
 
 #cerrar conexion y cursor
-cursor.close()
-conexion.close()
 
 v=Forma()
 v.mainloop()
+
+cursor.close()
+conexion.close()
