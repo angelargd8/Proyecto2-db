@@ -56,7 +56,23 @@ JOIN menu m ON q.id_elemento = m.id_elemento
 WHERE q.fecha BETWEEN 'fecha_inicio' AND 'fecha_fin'
 GROUP BY m.nombre_elemento;''',"Reporte de quejas por plato","Plato: Numero de quejas")
 
-
+Reporte6 = Reporte(conexion,cursor,'''SELECT 
+    nombre_personal,
+    DATE_TRUNC('month', fecha) AS mes,
+    AVG(amabilidad) AS promedio_amabilidad,
+    AVG(exactitud) AS promedio_exactitud
+FROM 
+    encuesta e
+Join
+	personal p on (p.id_personal = e.id_personal)
+WHERE 
+    fecha >= (CURRENT_DATE - INTERVAL '6 months')
+GROUP BY 
+    nombre_personal, 
+    DATE_TRUNC('month', fecha)
+ORDER BY 
+    nombre_personal, 
+    mes;''',"Eficiencia meseros segun encuestas ultimos 6 meses","Nombre Personal: Mes, promedio amabilidad, promedio exactitud",False)
 
 #clase
 class Forma(Tk):
@@ -268,8 +284,8 @@ class MenuPrincipal(Tk):
                 self.pantallas2.append(Reporte4.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
             elif i == 4:
                 self.pantallas2.append(Reporte5.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
-            else:
-                self.pantallas2.append(ttk.Frame(self.notebook3,style='TFrame.TFrame.TFrame'))
+            elif i == 5:
+                self.pantallas2.append(Reporte6.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
             self.notebook3.add(self.pantallas2[i], text=self.reportes[i])
 
         self.base_font = font.Font(family="Helvetica", size=30, weight="normal", slant="roman")
