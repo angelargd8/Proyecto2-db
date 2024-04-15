@@ -164,3 +164,9 @@ INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VAL
 INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1008, 3, 3, 8, '2024-04-08 12:00:00');
 INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1005, 4, 4, 9, '2024-04-09 12:00:00');
 INSERT INTO encuesta(id_personal, amabilidad, exactitud, encuesta_id, fecha) VALUES (1006, 5, 5, 10, '2024-04-10 12:00:00');
+
+insert into pago(id_pago, tipo_pago)
+values (4, 'Efectivo');
+insert into orden_pago( id_pago, cantidad, id_orden)
+values
+(4,1,4);
