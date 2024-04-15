@@ -1,0 +1,56 @@
+--------1----------
+SELECT id_elemento, COUNT(*) AS numero_pedidos
+FROM menu_orden
+WHERE fecha BETWEEN 'fecha_inicio' AND 'fecha_fin'
+AND estatus = 'entregada'
+GROUP BY id_elemento
+ORDER BY numero_pedidos DESC;
+
+--------2----------
+SELECT EXTRACT(HOUR FROM hora) AS hora_pedido, COUNT(*) AS numero_pedidos
+FROM menu_orden
+WHERE fecha BETWEEN 'fecha_inicio' AND 'fecha_fin'
+GROUP BY hora_pedido
+ORDER BY numero_pedidos DESC
+LIMIT 1;
+
+--------3----------
+SELECT cant_personas, AVG(EXTRACT(EPOCH FROM (orden_salida - orden_llegada))/3600) as avg_time
+FROM orden
+WHERE orden_llegada BETWEEN 'fecha_inicio' AND 'fecha_fin'
+GROUP BY cant_personas
+ORDER BY cant_personas;
+
+--------4----------
+SELECT p.nombre_personal, COUNT(q.id_queja) as num_quejas
+FROM personal p
+JOIN quejas q ON p.id_personal = q.id_personal
+WHERE q.fecha BETWEEN 'fecha_inicio' AND 'fecha_fin'
+GROUP BY p.nombre_personal
+ORDER BY num_quejas DESC;
+
+--------5----------
+SELECT m.nombre_elemento, COUNT(q.id_queja) AS numero_de_quejas
+FROM quejas q
+JOIN menu_orden mo ON q.id_orden = mo.id_orden
+JOIN menu m ON mo.id_elemento = m.id_elemento
+WHERE q.fecha BETWEEN fecha_inicio AND fecha_fin
+GROUP BY m.nombre_elemento;
+--------6----------
+SELECT 
+    p.nombre_personal,
+    DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month' * s.a AS mes,
+    AVG(e.amabilidad) as promedio_amabilidad,
+    AVG(e.exactitud) as promedio_exactitud
+FROM 
+    generate_series(0, 5, 1) as s(a)
+JOIN 
+    encuesta e ON DATE_TRUNC('month', e.fecha_encuesta) = DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month' * s.a
+JOIN 
+    personal p ON e.id_personal = p.id_personal
+GROUP BY 
+    p.nombre_personal, 
+    DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month' * s.a
+ORDER BY 
+    p.nombre_personal, 
+    DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '1 month' * s.a;
