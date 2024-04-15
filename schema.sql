@@ -128,7 +128,8 @@ CREATE TABLE personal (
 ALTER TABLE personal ADD CONSTRAINT personal_pk PRIMARY KEY ( id_personal );
 
 CREATE TABLE quejas (
-    id_personal   INTEGER NOT NULL,
+    id_personal   INTEGER,
+    id_elemento   INTEGER,
     motivo        VARCHAR(200) NOT NULL,
     id_queja      INTEGER NOT NULL,
     fecha         DATE NOT NULL,
@@ -141,6 +142,10 @@ ALTER TABLE quejas ADD CONSTRAINT quejas_pk PRIMARY KEY ( id_queja );
 ALTER TABLE mesas_areas
     ADD CONSTRAINT areasfkmesas FOREIGN KEY ( id_area )
         REFERENCES areas ( id_area );
+
+ALTER TABLE IF EXISTS quejas
+    ADD CONSTRAINT quejadkmenu FOREIGN KEY (id_elemento)
+    REFERENCES menu (id_elemento);
 
 --ALTER TABLE personal
 --    ADD CONSTRAINT encuestafkpersonal FOREIGN KEY ( id_personal )
