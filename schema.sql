@@ -129,10 +129,7 @@ ALTER TABLE personal ADD CONSTRAINT personal_pk PRIMARY KEY ( id_personal );
 
 CREATE TABLE quejas (
     id_personal   INTEGER,
-<<<<<<< HEAD
     id_elemento   INTEGER,
-=======
->>>>>>> f93ea7d6551eef860334ed5b23e9f4352b874b24
     motivo        VARCHAR(200) NOT NULL,
     id_queja      INTEGER NOT NULL,
     fecha         DATE NOT NULL,

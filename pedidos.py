@@ -9,32 +9,81 @@ conexion = conexiones()
 cursor= conexion.cursor()
 
 
+def capacidadPersonas(mesa):
+    try:
+        resultado = cursor.execute("SELECT capacidad FROM mesas WHERE id_mesa = %s",(mesa,))
+        resultado = cursor.fetchone()
+        return resultado[0]
+    except Exception as e:
+        print("Ocurrió un error:", e)
+        print(traceback.format_exc())
+        return False
+    
+def insertarMesaJunta(mesaJunta, mesa):
+    try:
+        cursor.execute("UPDATE mesas SET mesas_juntas = %s WHERE id_mesa = %s", (mesaJunta, mesa,))
+        conexion.commit()
+        return True
+    except Exception as e:
+        print("Ocurrió un error:", e)
+        print(traceback.format_exc())
+        return False
 
-        
-def crearPedido(id_mesero, mesa, cant_personas):
+# print(capacidadPersonas(12))
+def queryInsertar(id_mesero, mesa, cant_personas):
+    resultado = cursor.execute("SELECT COUNT(*) FROM orden")
+    resultado = cursor.fetchone()
+    id_pedido = resultado[0] + 1
+    print(id_pedido)
+    llegada = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    try:
+        cursor.execute("insert into orden (id_orden, id_mesero, estado_orden, id_mesa, orden_llegada, cant_personas) values (%s,%s,%s,%s,%s,%s)", (id_pedido, id_mesero, "abierto", mesa, llegada, cant_personas))
+        conexion.commit()
+        cursor.execute("UPDATE mesas SET habilitada = '0' WHERE id_mesa = %s", (mesa,))
+        conexion.commit()
+        messagebox.showinfo("Atencion!", f"Orden creada y su codigo(id) es: {id_pedido}")
+        return True
+    except Exception as e:
+        print("Ocurrió un error:", e)
+        print(traceback.format_exc())
+        return False
+    
+def cambiarEstadoMesa(mesa, estado):
+    try:
+        cursor.execute("UPDATE mesas SET habilitada = %s WHERE id_mesa = %s", (estado, mesa,))
+        conexion.commit()
+        return True
+    except Exception as e:
+        print("Ocurrió un error:", e)
+        print(traceback.format_exc())
+        return False
+
+def crearPedido(id_mesero, mesa, cant_personas,mesasJuntas=False,mesaJunta = None):
     try:
         if mesa == "" or id_mesero == "" or id_mesero == "":
             messagebox.showerror("error","rellene todos los campos")
+            return False
         else:
-            resultado = cursor.execute("SELECT COUNT(*) FROM orden")
-            resultado = cursor.fetchone()
-            id_pedido = resultado[0] + 1
-            print(id_pedido)
-            llegada = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-            try:
-                cursor.execute("insert into orden (id_orden, id_mesero, estado_orden, id_mesa, orden_llegada, cant_personas) values (%s,%s,%s,%s,%s,%s)", (id_pedido, id_mesero, "abierto", mesa, llegada, cant_personas))
-                conexion.commit()
-                cursor.execute("UPDATE mesas SET habilitada = '0' WHERE id_mesa = %s", (mesa,))
-                conexion.commit()
-                messagebox.showinfo("Atencion!", f"Orden creada y su codigo(id) es: {id_pedido}")
-                return id_pedido
-            except Exception as e:
-                print("Ocurrió un error:", e)
-                print(traceback.format_exc())
+            if mesasJuntas:
+                if cant_personas>capacidadPersonas(mesa)+capacidadPersonas(mesaJunta):
+                    messagebox.showerror("error","La cantidad de personas excede la capacidad de las mesas")
+                    return False
+                else:
+                    queryInsertar(id_mesero, mesa, cant_personas)
+                    cambiarEstadoMesa(mesaJunta, '0')
+                    insertarMesaJunta(mesaJunta, mesa)
+                    return True
+            else:
+                if cant_personas>capacidadPersonas(mesa):
+                    messagebox.showerror("error","La cantidad de personas excede la capacidad de la mesa")
+                    return False
+                else:
+                    queryInsertar(id_mesero, mesa, cant_personas)
+                    return True
     except Exception as msg:
-        messagebox.showerror("Error", "No se pudo ingresar, ingrese bien los datos")
+        messagebox.showerror("Error", "No se pudo ingresar, ingrese bien los datos"+str(msg))
         return False
+# crearPedido(1005, 2, 4,True,3)
     
 def obtenerOrden():
     try:
@@ -72,9 +121,33 @@ def encontrarMesa(matriz, numero):
         for columna_index, valor in enumerate(fila):
             if valor == numero:
                 return fila_index , columna_index 
+            
+def encontrarMesa2(matriz, numero):
+    for fila_index, fila in enumerate(matriz):
+        for columna_index, valor in enumerate(fila):
+            if valor == numero:
+                return  columna_index 
 
-def cerrarCuenta():
-    pass
+def cerrarCuenta(orden):
+    try:
+        resultado = cursor.execute("select o.id_orden, o.id_mesa, o.id_mesero, o.cant_personas, m.mesas_juntas from orden as o join mesas as m on(o.id_mesa = m.id_mesa) where estado_orden = 'abierto' and id_orden = %s",(orden,))
+        resultado = cursor.fetchone()
+        print(resultado)
+        if(resultado[4] != None):
+            cursor.execute("UPDATE mesas SET habilitada = '1' WHERE id_mesa = %s", (resultado[4],))
+            conexion.commit()
+        cursor.execute("UPDATE mesas SET habilitada = '1' WHERE id_mesa = %s", (resultado[1],))
+        conexion.commit()
+        cursor.execute("UPDATE orden SET estado_orden = 'cerrado' WHERE id_orden = %s", (orden,))
+        conexion.commit()
+        salida = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        cursor.execute("UPDATE orden SET orden_salida = %s WHERE id_orden = %s", (salida,orden,))
+        conexion.commit()
+        return True
+    except Exception as msg:
+        messagebox.showerror("Error", "No se pudo realizar consulta")
+        return False
 
 def añadirPedido(id_elemento, id_orden):
     try:
@@ -117,12 +190,23 @@ def listadoOrden(id_orden):
         messagebox.showerror("Error", "No se pudo realizar consulta")
         return False
     
-def mesasDeshabilitadas():
+def mesasMover():
     try:
-        resultado = cursor.execute("select id_mesa from mesas where habilitada = '0'")
+        sql = "select id_mesa from mesas where movibilidad = '1'"
+        resultado = cursor.execute(sql,)
         resultado = cursor.fetchall()
+        resultado = [fila[0] for fila in resultado]
         return resultado
     except Exception as msg:
         messagebox.showerror("Error", "No se pudo realizar consulta")
         return False
-print(mesasDeshabilitadas())
+
+def mesasDispo(area,m1):
+    try:
+        resultado = cursor.execute("select ma.id_mesa from mesas_areas as ma join mesas as m on (ma.id_mesa = m.id_mesa) where ma.id_area = %s and m.movibilidad ='1' and m.habilitada = '1' and m.id_mesa != %s",(area,m1,))
+        resultado = cursor.fetchall()
+        resultado = [fila[0] for fila in resultado]
+        return resultado
+    except Exception as msg:
+        messagebox.showerror("Error", "No se pudo realizar consulta")
+        return False

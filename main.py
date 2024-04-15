@@ -230,8 +230,10 @@ class MenuPrincipal(Tk):
         
         for j in range(len(self.cantMesas)):
             Label(self.pantallas[j], text=self.areas[j], font=self.custom_font, bg="#3c096c", fg="white").place(x=30, y=10)
+            Label(self.pantallas[j], text="Capacidad", font=self.custom_font2, bg="#3c096c", fg="white").place(x=220, y=45)
             self.ordenesS1 = []
             numeros = []
+            
             for i in range(self.cantMesas[j]):
                 numeros.append(cont)
                 cont += 1
@@ -245,6 +247,10 @@ class MenuPrincipal(Tk):
             self.mesas.append(numeros)
             self.ordenes.append(self.ordenesS1)
         print(self.mesas)
+        for j in range(len(self.cantMesas)):
+            for i in range(self.cantMesas[j]):
+                Label(self.pantallas[j], text=pedidos.capacidadPersonas(self.mesas[j][i])).place(x=270, y=80+(i*30))
+
         self.actualizar_ordenes()
         self.No_orden_query = pedidos.obtenerOrden() # query que obtiene el numero de orden actual
         
@@ -263,31 +269,38 @@ class MenuPrincipal(Tk):
     def llamar_boton(self, j, i): # valida si la orden ya esta creada o hay que crearla 
         if self.ordenes[j][i].cget("text") == "Agregar Orden ":
             self.pestaña_orden(j,i,1)# se le pasa 1 cuando se acaba de crear, de lo contrario no se le pasa nada
+        elif self.ordenes[j][i].cget("text") == "No disponible":
+            messagebox.showinfo("Info", "Mesa no disponible")
         else:
             self.pestaña_orden(j,i)
     
     
-    def crear_orden(self,j,i): # cuando ingresa un cliente al restaurante se le crea la cuenta
+    def crear_orden(self,j,i,mesasJuntas=False,mesaJunta = None,a=None): # cuando ingresa un cliente al restaurante se le crea la cuenta
         print(j,i)
         # crear nueva cuenta 
-        self.No_orden_query = pedidos.obtenerOrden() + 1
-        self.ordenesactuales[j][i] = self.No_orden_query
-        print(self.ordenesactuales)
-
-        self.ordenes[j][i].config(text="Orden "+str(self.No_orden_query)) # se remplaza por el query
         # informacion de orden 
         mesero = self.MeseroEntry.get()
         mesa = self.mesas[j][i]
         personas = self.Cantidad_personas.get()
         print("mesero: ",mesero,", mesa: ", mesa,", personas: ", personas)
-        # query para crear la orden
-        pedidos.crearPedido(mesero, mesa, personas)
-        self.vent.destroy()
+
+        if (pedidos.crearPedido(int(mesero), int(mesa), int(personas),mesasJuntas,mesaJunta) ):
+            self.No_orden_query = pedidos.obtenerOrden() + 1
+            self.ordenesactuales[j][i] = self.No_orden_query
+            print(self.ordenesactuales)
+            self.ordenes[j][i].config(text="Orden "+str(self.No_orden_query)) # se remplaza por el query
+            
+            if (mesasJuntas):
+                
+                self.ordenes[j][pedidos.encontrarMesa2(self.mesas, int(mesaJunta))].config(text="No disponible")
+            # query para crear la orden
+            self.vent.destroy()
+        else:
+            messagebox.showerror("Error", "No se pudo crear pedido")
 
    
     def pestaña_orden(self,j,i, NoOrden=0): # i es el numero de mesa / si no se le pasa el numero, la cuenta ya existe
         self.vent = Toplevel()
-        self.vent.geometry("500x400")
         Label(self.vent, text="No. Mesa").place(x=50, y=20)
         Label(self.vent,width=10, text = str(i+1)).place(x=150, y=20)
         Label(self.vent, text="No. Orden").place(x=50, y=50)
@@ -301,24 +314,28 @@ class MenuPrincipal(Tk):
         Label(self.vent, text="No. Personas").place(x=50, y=110)
         self.Cantidad_personas = Entry(self.vent,width=10)
         self.Cantidad_personas.place(x=150, y=110)
-      
-        Label(self.vent, text="Ordenes").place(x=50, y=140)
-        self.text3 = Text(self.vent,width=30, height=10)
-        self.text3.place(x=150, y=140)
+
         
         if NoOrden == 1: # primera vez que se crea 
             self.vent.title("Crear orden")
-            self.text3.config(state = DISABLED)
-            Button(self.vent, text="Guardar Orden", command=lambda  j=j,i=i:self.crear_orden(j,i)).place(x=300, y=320)
-            Button(self.vent, text="Cancelar", command=lambda  j=j,i=i,ventana = self.vent:self.cerrar_pedido(j,i,self.vent)).place(x=150, y=320)
+            self.vent.geometry("500x300")
+            Button(self.vent, text="Guardar Orden", command=lambda  j=j,i=i:self.crear_orden(j,i)).place(x=100, y=220)
+            Button(self.vent, text="Cancelar", command=lambda  j=j,i=i,ventana = self.vent:self.cerrar_pedido(j,i,self.vent)).place(x=350, y=220)
+            if self.mesas[j][i] in pedidos.mesasMover():
+                Button(self.vent, text="Juntar mesa", command=lambda  j=j,i=i:self.mover_mesa(j,i)).place(x=200, y=220)
         else:
+            self.vent.geometry("500x400")
             self.vent.title("Modificar orden")
+            Label(self.vent, text="Ordenes").place(x=50, y=140)
+            self.text3 = Text(self.vent,width=30, height=10)
+            self.text3.place(x=150, y=140)
             orden = self.ordenesactuales[j][i]
             Label(self.vent, width=10,text=str(orden)).place(x=150, y=50)
             # print(orden)
             self.text3.insert(INSERT, pedidos.listadoOrden(orden))
             self.text3.config(state = DISABLED)
             info = pedidos.ordenEspecifica(orden)
+            print(info)
             self.MeseroEntry.insert(0, info[2])
             self.Cantidad_personas.insert(0, info[3])
             self.MeseroEntry.config(state=DISABLED)
@@ -326,6 +343,25 @@ class MenuPrincipal(Tk):
             Button(self.vent, text="Añadir a la orden", command=lambda  j=j,i=i:self.añadir_pedido(j,i)).place(x=150, y=320)
             Button(self.vent, text="Cerrar cuenta", command=lambda  j=j,i=i,ventana = self.vent:self.cerrar_pedido(j,i,self.vent)).place(x=400, y=50)
 
+    def mover_mesa(self,j,i):
+        self.l = Toplevel()
+        self.l.title("Juntar mesa")
+        self.l.geometry("500x200")
+        Label(self.l, text="Mesas disponibles").place(x=50, y=20)
+        print(pedidos.mesasDispo(j+1,self.mesas[j][i]),j+1)
+        self.comboBox = ttk.Combobox(self.l, values = pedidos.mesasDispo(j+1,self.mesas[j][i]))
+        self.comboBox.place(x=200, y=20)
+        self.comboBox.bind("<<ComboboxSelected>>", self.on_select)
+        self.mesa2 = ''
+        
+              
+        Button(self.l, text="Juntar",command=lambda j=j, i=i, mesasJuntas=True, mesaJunta=self.mesa2:self.crear_orden(j,i,True,self.mesa2)).place(x=200, y=100)
+
+    
+    def on_select(self,event):
+        self.mesa2 = self.comboBox.get()
+        print("Seleccionado:", self.mesa2)
+        
 
 
     def añadir_pedido(self,j,i): # se añade un pedido a la cuenta
@@ -390,6 +426,7 @@ class MenuPrincipal(Tk):
        
     def cerrar_pedido(self,j,i, ventana): # se cierra la cuenta y se genera factura, ya no se pueden hacer modificaciones
         # se modifica la cuenta a cerrada
+        pedidos.cerrarCuenta(self.ordenesactuales[j][i])
         self.ordenesactuales[j][i] = 0 # borra la orden de la mesa
         self.ordenes[j][i].config(text="Agregar Orden ")
         ventana.destroy()
