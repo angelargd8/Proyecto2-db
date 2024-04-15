@@ -9,6 +9,7 @@ from datetime import datetime
 from registrar import registrar
 from InicioSesion import iniciarSesion
 from Pantalla import Pantallas
+from PIL import Image, ImageTk
 #conexion
 conexion = conexiones()
 #uso de cursor
@@ -101,6 +102,8 @@ class MenuPrincipal(Tk):
         self.l1= Label(self, text="Restaurante chilerisimo", font=self.custom_font, bg="#3c096c", fg="white").place(x=20, y=20)
         self.style= ttk.Style()
         self.style.configure('TFrame', background="#5a189a", foreground="#5a189a" )
+
+        self.imagenes = []
 
         self.notebook = ttk.Notebook(self)
         self.notebook.pack(fill="both", expand="yes")
@@ -225,10 +228,59 @@ class MenuPrincipal(Tk):
         Button(self.vent, text="Guardar Orden", command=lambda No_orden=no_orden:self.guardar_pedido(no_orden)).place(x=300, y=320)
         Button(self.vent, text="Cerrar cuenta", command=lambda  j=j,i=i,ventana = self.vent:self.cerrar_pedido(j,i,self.vent)).place(x=400, y=50)
 
-
     def añadir_pedido(self, i): # se añade un pedido a la cuenta
-        # print(i)        
-        pass
+        self.add = Toplevel()
+        self.add.title("crear")    
+        self.add.geometry("600x150")
+        self.add["bg"] = "blueviolet"
+
+        self.comida = Button(self.add, text="COMIDA", height=5, width=10, command=lambda: self.showElement('comida'));self.comida.place(x=200,y=5)
+        self.bebidas = Button(self.add, text="BEBIDAS",height=5, width=10, command=lambda: self.showElement('bebida'));self.bebidas.place(x=350,y=5)
+
+    def showElement(self,tipo):
+        self.comida.destroy()
+        self.bebidas.destroy()
+        self.add.geometry("700x400")
+
+        cursor.execute(f"select * from menu where tipo_elemento = '{tipo}'")
+        resultados = cursor.fetchall()
+        
+        index = 0
+        x=10
+        y= 5
+        for i in resultados:
+            canvas = Canvas(self.add, width=150, height=150, background="#53007f")
+        
+            ruta = resultados[index][-1].split("/")
+
+            ruta_actual = os.path.dirname(os.path.abspath(__file__))
+            ruta_img = os.path.join(ruta_actual, 'img')
+
+            archivo_buscar = ruta[1]
+            ruta_archivo = os.path.join(ruta_img, archivo_buscar)
+
+            img_data = Image.open(ruta_archivo)
+
+            nuevo_tamanio=(100,100)
+            img_data = img_data.resize(nuevo_tamanio)
+            tk_img = ImageTk.PhotoImage(img_data)
+            self.imagenes.append(tk_img)
+
+            canvas.create_image(20,0, anchor=NW,image=self.imagenes[-1])
+            canvas.create_text(80,110,text=i[1], fill="white")
+            canvas.create_text(80,130,text=f"Precio: {i[4]}", fill="White")
+            canvas.place(x=x,y=y)
+            print(i[0])
+            canvas.bind("<Button-1>", lambda event, i = i: self.apacharMenu(i[0]))
+            x+=170
+            if(x > 600):
+                x = 10
+                y +=170
+            index+=1
+
+
+    def apacharMenu(self, idElemento):
+        print(f"Elemento Apachado: {idElemento}")
 
     def guardar_pedido(self,No_orden): # se guarda la cuenta
         self.vent = Toplevel()
