@@ -10,6 +10,9 @@ from registrar import registrar
 from InicioSesion import iniciarSesion
 from Pantalla import Pantallas
 from PIL import Image, ImageTk
+#-----------------------------------------------------------------
+from ImpresionFactura import impresionFactura
+#-----------------------------------------------------------------
 #conexion
 conexion = conexiones()
 #uso de cursor
@@ -29,6 +32,10 @@ class Forma(Tk):
         self.custom_font = self.base_font.copy();self.custom_font2 = self.base_font.copy()
         self.custom_font.configure(size=30, weight="bold") #underline=1
         self.custom_font2.configure(size=15, weight="bold") #underline=1
+        #-----------------------------------------------------------------
+        self.custom_font3 = self.base_font.copy()
+        self.custom_font3.configure(size=10, weight="bold") #underline=1
+        #-----------------------------------------------------------------
         self.l1= Label(self, text="Login", font=self.custom_font, bg="#3c096c", fg="white").place(x=395, y=100)
         self.l2= Label(self, text="ingrese su codigo:", font=self.custom_font2, bg="#3c096c", fg="white").place(x=365, y=200)
         self.e1= Entry(width=35); self.e1.place(x=355,y=230)
@@ -118,29 +125,77 @@ class MenuPrincipal(Tk):
         self.tab2=ttk.Frame(self.notebook)
         self.style.configure('TFrame.TFrame.TFrame', background="#9d4edd", foreground="#5a189a" )
         self.tab3=ttk.Frame(self.notebook,style='TFrame.TFrame.TFrame')
+        #-----------------------------------------------------------------
+        self.tab4=ttk.Frame(self.notebook,style='TFrame.TFrame')
+        #-----------------------------------------------------------------
+
 
         self.notebook.add(self.tab1, text="Pedido")
         self.notebook.add(Bar.Cocina(self.notebook,'TFrame.TFrame.TFrame'), text="Bar")
         self.notebook.add(Cocina.Cocina(self.notebook,'TFrame.TFrame.TFrame'), text="Cocina")
-
+        #-----------------------------------------------------------------
+        self.notebook.add(self.tab4, text="Impresion factura")
+    
         self.mostrar_objetos(rol)
 
 
 
     def mostrar_objetos(self, rol):
         if rol == "mesero" or rol == "mesera":
-            pass
+            self.salir()
         elif rol == "cocinero" or rol == "cocinera":
-            pass
+            self.salir()
         elif rol == "admin" or rol == "administrador":
             self.crear_tab1()
             self.registrar_miembros(rol)
+            self.salir()
+            self.crear_tab4()
         elif rol == "gerente":
-            pass
+            self.salir()
         elif rol == "recepcionista":
-            pass
+            self.salir()
         elif rol == "personal":
-            pass
+            self.salir()
+#-----------------------------------------------------------------
+    def crear_tab4(self):
+        self.l1= Label(self.tab4, text="Impresion de factura", font=self.custom_font, bg="#3c096c", fg="white").place(x=20, y=20)
+        Button(self.tab4, text="Imprimir factura", font=("Arial", 9),fg="white" ,width=19, bg="#9d4edd", command=lambda:self.imprimir_factura()).place(x=480,y=85) 
+        self.base_font = font.Font(family="Helvetica", size=30, weight="normal", slant="roman")
+        self.custom_font3 = self.base_font.copy()
+        self.custom_font3.configure(size=10, weight="bold") #underline=1
+        self.l5= Label(self.tab4, text="Ingrese el id de la orden:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=90)
+        self.e5= Entry(self.tab4,width=35); self.e5.place(x=200,y=90)
+
+        
+    def imprimir_factura(self):
+        self.id_orden = self.e5.get()
+        resultado_impresion = impresionFactura(self.id_orden)
+        if resultado_impresion[0] == True:
+            self.l6= Label(self.tab4, text="Factura:", font=self.custom_font3, bg="#3c096c", fg="white").place(x=20, y=120)
+            self.area_texto= Text(self.tab4, height=19, width=85,font=("Helvetica", 11))
+            self.area_texto.place(x=90, y=120)
+            self.nit = resultado_impresion[1]
+            self.nombre_nit = resultado_impresion[2]
+            self.direccion = resultado_impresion[3]
+            self.tipo_pago = resultado_impresion[4]
+            self.area_texto.insert(INSERT, "Nit de la orden   : %s \n" % (self.nit))
+            self.area_texto.insert(INSERT, "Nombre del cliente: %s \n" % (self.nombre_nit))
+            self.area_texto.insert(INSERT, "Direccion         : %s \n" % (self.direccion))
+            self.area_texto.insert(INSERT, "Tipo de pago      : %s \n" % (self.tipo_pago))
+
+            
+        else:
+            messagebox.showerror("Error", "No se pudo registrar")
+
+    def salir(self):
+        Button(self, text="Cerrar sesión", font=("Arial", 15),fg="white" ,width=12, bg="#240046", command=lambda:self.cerrarSesion()).place(x=640,y=20) 
+
+    def cerrarSesion(self):
+        self.destroy()
+        ventana = Forma()
+#-----------------------------------------------------------------
+
+
 
     def crear_tab1(self):
 
