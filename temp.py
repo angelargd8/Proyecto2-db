@@ -13,6 +13,7 @@ from PIL import Image, ImageTk
 #-----------------------------------------------------------------
 from ImpresionFactura import impresionFactura
 #-----------------------------------------------------------------
+from Reporte1y2 import Reporte
 #conexion
 conexion = conexiones()
 #uso de cursor
@@ -20,6 +21,13 @@ cursor= conexion.cursor()
 
 Cocina = Pantallas(cursor, conexion, 'comida')
 Bar = Pantallas(cursor, conexion,'bebida')
+Reporte1 = Reporte(conexion,cursor,'''SELECT nombre_elemento, COUNT(*) AS numero_pedidos
+FROM menu_orden mo
+inner join menu m on (mo.id_elemento = m.id_elemento)
+WHERE date(hora) BETWEEN 'fecha_inicio' AND 'fecha_fin'
+AND estatus = 'entregada'
+GROUP BY nombre_elemento
+ORDER BY numero_pedidos DESC;''', "Platos mas pedidos en un rango de fechas")
 
 #clase
 class Forma(Tk):
@@ -178,7 +186,10 @@ class MenuPrincipal(Tk):
         # agregar las pestañas de los salones
         self.pantallas2 = []
         for i in range(5):
-            self.pantallas2.append(ttk.Frame(self.notebook3,style='TFrame.TFrame.TFrame'))
+            if i == 0:
+                self.pantallas2.append(Reporte1.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
+            else:
+                self.pantallas2.append(ttk.Frame(self.notebook3,style='TFrame.TFrame.TFrame'))
             self.notebook3.add(self.pantallas2[i], text=self.reportes[i])
 
         self.base_font = font.Font(family="Helvetica", size=30, weight="normal", slant="roman")
