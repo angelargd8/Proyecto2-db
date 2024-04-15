@@ -76,15 +76,18 @@ class Forma(Tk):
 
     def Login(self):
         #validacion del usuario y contraseña
-        self.codigo = str(self.e1.get())
-        self.contraseña = str(self.e2.get())
-        login_resultado1, rol = iniciarSesion(self.codigo, self.contraseña)
-        if login_resultado1== True:
-            self.destroy()
-            ventana= MenuPrincipal(rol)
-        else:
-            messagebox.showerror("Error", "No se pudo ingresar, ingrese bien los datos")
-
+        #cambios
+        try:
+            self.codigo = str(self.e1.get())
+            self.contraseña = str(self.e2.get())
+            login_resultado1, rol = iniciarSesion(self.codigo, self.contraseña)
+            if login_resultado1== True:
+                self.destroy()
+                ventana= MenuPrincipal(rol)
+            else:
+                messagebox.showerror("Error", "No se pudo ingresar, ingrese bien los datos")
+        except Exception as msg:
+            messagebox.showerror("Error","ingrese correctamente los datos")
     
 
 
@@ -112,16 +115,20 @@ class Registrarse(Tk):
 
 
     def registro(self, rol):
-        self.nombre =self.e1.get()
-        self.contraseña = self.e2.get()
-        self.clasificacion = self.e3.get()
-        self.id_area = self.e4.get()
-        resultado = registrar(self.nombre, self.contraseña, self.clasificacion,self.id_area)
-        if resultado == True:
-            self.destroy()
-            ventana= MenuPrincipal(rol)
-        else:
-            messagebox.showerror("Error", "No se pudo registrar")
+    #cambios
+        try:
+            self.nombre =self.e1.get()
+            self.contraseña = self.e2.get()
+            self.clasificacion = self.e3.get()
+            self.id_area = self.e4.get()
+            resultado = registrar(self.nombre, self.contraseña, self.clasificacion,self.id_area)
+            if resultado == True:
+                self.destroy()
+                ventana= MenuPrincipal(rol)
+            else:
+                messagebox.showerror("Error", "No se pudo registrar")
+        except Exception as msg:
+            messagebox.showerror("Error","ingrese correctamente los datos")
 
 
 class MenuPrincipal(Tk):
@@ -230,7 +237,7 @@ class MenuPrincipal(Tk):
             InsertarQueja(self.id_personal, self.motivo,self.fecha, self.hora, self.clasificacion,  self.id_elemento)
         except Exception as msg:
             messagebox.showerror("Error","ingrese bien los datos")
-            
+
     def crear_tab5(self):
         self.l1= Label(self.tab5, text="Reportes", font=self.custom_font, bg="#3c096c", fg="white").place(x=20, y=20)
         self.notebook3 = ttk.Notebook(self.tab5)
