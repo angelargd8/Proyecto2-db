@@ -22,7 +22,7 @@ cursor= conexion.cursor()
 Cocina = Pantallas(cursor, conexion, 'comida')
 Bar = Pantallas(cursor, conexion,'bebida')
 #cambios
-Reporte1 = Reporte(conexion,cursor,'''SELECT nombre_elemento, COUNT() AS numero_pedidos
+Reporte1 = Reporte(conexion,cursor,'''SELECT nombre_elemento, COUNT(*) AS numero_pedidos
 FROM menu_orden mo
 inner join menu m on (mo.id_elemento = m.id_elemento)
 WHERE date(hora) BETWEEN 'fecha_inicio' AND 'fecha_fin'
@@ -30,12 +30,18 @@ AND estatus = 'entregada'
 GROUP BY nombre_elemento
 ORDER BY numero_pedidos DESC;''', "Platos mas pedidos en un rango de fechas","Plato: Numero de pedidos")
 
-Reporte2 = Reporte(conexion,cursor,'''SELECT EXTRACT(HOUR FROM hora) AS hora_pedido, COUNT() AS numero_pedidos
+Reporte2 = Reporte(conexion,cursor,'''SELECT EXTRACT(HOUR FROM hora) AS hora_pedido, COUNT(*) AS numero_pedidos
 FROM menu_orden
 WHERE hora BETWEEN 'fecha_inicio' AND 'fecha_fin'
 GROUP BY hora_pedido
 ORDER BY numero_pedidos DESC
 LIMIT 1;''',"Horario en el que ingresan mas pedidos","Hora: Numero de pedidos")
+
+Reporte3 = Reporte(conexion,cursor,'''SELECT cant_personas, AVG(EXTRACT(EPOCH FROM (orden_salida - orden_llegada))/3600) as avg_time
+FROM orden
+WHERE orden_llegada BETWEEN 'fecha_inicio' AND 'fecha_fin'
+GROUP BY cant_personas
+ORDER BY cant_personas;''',"Cantidad de personas por tiempo en el que comen","Cantidad Personas: Promedio de tiempo")
 
 Reporte4 = Reporte(conexion, cursor,'''SELECT p.nombre_personal, COUNT(q.id_queja) as num_quejas
 FROM personal p
@@ -49,6 +55,8 @@ FROM quejas q
 JOIN menu m ON q.id_elemento = m.id_elemento
 WHERE q.fecha BETWEEN 'fecha_inicio' AND 'fecha_fin'
 GROUP BY m.nombre_elemento;''',"Reporte de quejas por plato","Plato: Numero de quejas")
+
+
 
 #clase
 class Forma(Tk):
@@ -254,6 +262,8 @@ class MenuPrincipal(Tk):
                 self.pantallas2.append(Reporte1.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
             elif i == 1:
                 self.pantallas2.append(Reporte2.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
+            elif i == 2:
+                self.pantallas2.append(Reporte3.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
             elif i == 3:
                 self.pantallas2.append(Reporte4.reporte(self.notebook3,'TFrame.TFrame.TFrame'))
             elif i == 4:
