@@ -5,13 +5,15 @@ import os
 from tkcalendar import Calendar
 
 class Reporte():
-    def __init__(self,_conn,_cursor, _query,_text):
+    def __init__(self,_conn,_cursor, _query,_text,_result):
         self.cursor = _cursor
         self.conn = _conn
         self.query = _query
+        self.oldQuery = _query
         self.fecha1 = ""
         self.fecha2 = ""
         self.text = _text
+        self.extraText = _result
 
 
     def calendar(self, entry, fecha):
@@ -28,12 +30,30 @@ class Reporte():
         ttk.Button(top, text="OK", command=changeDate).pack()
 
     def generateResult(self):
-        tempQuery = self.query.split("'fecha_inicio' AND 'fecha_fin'")
-        print(tempQuery)
         if(self.fecha1.get() == "" or self.fecha2.get() ==""):
             messagebox.showerror("Error","Ingrese las dos fechas primero")
         else:
-            pass
+            tempQuery = self.query.split("'fecha_inicio' AND 'fecha_fin'")
+            print(tempQuery)
+
+            self.query = tempQuery[0]+f"'{self.fecha1.get()}' AND '{self.fecha2.get()}' "+tempQuery[1]
+            print(self.query)
+            self.cursor.execute(self.query)
+            result = self.cursor.fetchall()
+            print(result)
+
+            if(result == []):
+                self.result.delete("1.0", END)
+                self.result.insert(END, "No hay informacion sobre ese rango de fechas")
+            else:
+                self.textResult = f"{self.extraText}\n"
+                for i in result:
+                    self.textResult += f"{i[0]}: {i[1]}\n"
+                    
+                self.result.delete("1.0", END)
+                self.result.insert(END, self.textResult)
+
+            self.query = self.oldQuery
 
 
     def reporte(self,_self,_style):
