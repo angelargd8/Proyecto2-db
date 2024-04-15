@@ -117,3 +117,39 @@ WHERE EXISTS (
 UPDATE mesas
 SET habilitada = '0'
 WHERE id_mesa = 4;
+
+INSERT INTO orden(id_orden, id_mesa, total_orden, estado_orden, propina, id_mesero, nit, nombre_nit, direccion, orden_llegada, orden_salida, cant_personas) 
+VALUES (3, 1, 140.00, 'cerrado', 10.00, 1005, '1234567890', 'Pepito chistes', 'Casa pepito', '2024-04-12 12:00:00', '2024-04-12 14:00:00', 2);
+
+INSERT INTO orden(id_orden, id_mesa, total_orden, estado_orden, propina, id_mesero, nit, nombre_nit, direccion, orden_llegada, orden_salida, cant_personas) 
+VALUES (4, 2, 330.00, 'cerrado', 20.00, 1006, '0987654321', 'Aroldo', 'Casa juarez', '2024-04-12 12:30:00', '2024-04-12 14:30:00', 4);
+
+
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (1, 1, 1, 'solicitada', '2024-04-11 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (2, 2, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (3, 1, 1, 'solicitada', '2024-04-13 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (4, 2, 1, 'entregada', '2024-04-14 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (5, 1, 1, 'solicitada', '2024-04-15 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (6, 2, 1, 'entregada', '2024-04-16 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (7, 1, 1, 'solicitada', '2024-04-17 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (1, 2, 1, 'entregada', '2024-04-15 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (5, 1, 1, 'solicitada', '2024-04-18 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (8, 2, 1, 'entregada', '2024-04-11 12:00:00');
+
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (1, 3, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (1, 3, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (4, 3, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (4, 3, 1, 'entregada', '2024-04-12 12:00:00');
+
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (1, 4, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (2, 4, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (3, 4, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (3, 4, 1, 'entregada', '2024-04-12 12:00:00');
+
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (5, 4, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (5, 4, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (4, 4, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (4, 4, 1, 'entregada', '2024-04-12 12:00:00');
+
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (7, 4, 1, 'entregada', '2024-04-12 12:00:00');
+INSERT INTO menu_orden(id_elemento, id_orden, cantidad, estatus, hora) VALUES (6, 4, 1, 'entregada', '2024-04-12 12:00:00');
