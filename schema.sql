@@ -128,7 +128,7 @@ CREATE TABLE personal (
 ALTER TABLE personal ADD CONSTRAINT personal_pk PRIMARY KEY ( id_personal );
 
 CREATE TABLE quejas (
-    id_personal   INTEGER NOT NULL,
+    id_personal   INTEGER,
     motivo        VARCHAR(200) NOT NULL,
     id_queja      INTEGER NOT NULL,
     fecha         DATE NOT NULL,
