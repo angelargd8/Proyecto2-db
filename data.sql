@@ -105,3 +105,32 @@ WHERE EXISTS (
 UPDATE mesas
 SET habilitada = '0'
 WHERE id_mesa = 4;
+
+--quejas
+INSERT INTO public.quejas(
+	id_personal, motivo, id_queja, fecha, hora, clasificacion)
+VALUES (1005, 'no me gusto que el pollo frito tenga mucha grasa', 1, '11/04/2024', 4, 'comida');
+
+INSERT INTO public.quejas(
+	id_personal, motivo, id_queja, fecha, hora, clasificacion)
+	VALUES (1005, 'el mesero me atendio mal', 2, '18/04/2024', 4, 'servicio');
+
+INSERT INTO public.quejas(
+	id_personal, motivo, id_queja, fecha, hora, clasificacion)
+	VALUES (1006, 'se le paro una mosca a mi comida', 13, '11/04/2024', 4, 'comida');
+
+
+insert into orden (id_orden,id_mesa,estado_orden,id_mesero)
+values
+(4,2,'cerrado',1005);
+
+insert into pago(id_pago, tipo_pago)
+values (4, 'Efectivo');
+
+insert into orden_pago( id_pago, cantidad, id_orden)
+values
+(4,1,4);
+
+update orden
+set nit = 12345678, nombre_nit='papa orson scrum', direccion='combex'
+where id_orden= 4;
