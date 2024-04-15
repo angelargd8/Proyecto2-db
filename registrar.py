@@ -4,27 +4,6 @@ from tkinter import messagebox
 from conexion import conexiones
 import traceback
 
-#lo que hay que editar del esquema
-"""
-ALTER TABLE IF EXISTS public.personal
-    ADD COLUMN password varchar(250);
-
-ALTER TABLE IF EXISTS public.personal
-    ADD COLUMN clasificacion varchar(250);
-"""
-#parte que va en main.py, pero para que no se tilinee, lo pondré aqui
-"""
-        self.e3= Entry(width=35); self.e3.place(x=355,y=370)
-        self.btn1= Button(self, text="registrarse", font=("Arial", 15),fg="white" ,width=19, bg="#9d4edd", command=lambda:self.registro()).place(x=355,y=410) 
-       
-    def registro(self):
-        self.nombre =self.e1.get()
-        self.contraseña = self.e2.get()
-        self.clasificacion = self.e3.get()
-        registrar(self.nombre, self.contraseña, self.clasificacion)
-
-"""
-
 conexion = conexiones()
 cursor= conexion.cursor()
 

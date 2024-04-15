@@ -9,7 +9,7 @@ def conexiones():
             host = "localhost",
             database = "Restaurante",
             user = "postgres",
-            password = Password3, 
+            password = Password1, 
             port = "5432" #SELECT * FROM pg_settings WHERE name = 'port';
         )
         print("conexion exitosa")
