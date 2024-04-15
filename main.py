@@ -10,6 +10,7 @@ from registrar import registrar
 from InicioSesion import iniciarSesion
 from Pantalla import Pantallas
 from PIL import Image, ImageTk
+import pedidos
 #-----------------------------------------------------------------
 from ImpresionFactura import impresionFactura
 #-----------------------------------------------------------------
@@ -242,7 +243,7 @@ class MenuPrincipal(Tk):
                 
             self.ordenes.append(self.ordenesS1)
         # al crear una nueva cuenta se remplaza 
-        self.No_orden_query = 0 # borrar al tener el query 
+        self.No_orden_query = pedidos.obtenerOrden() # borrar al tener el query 
         print(self.ordenesactuales)
         
     
@@ -261,8 +262,8 @@ class MenuPrincipal(Tk):
         self.vent.geometry("500x400")
         # informacion de orden 
         self.pestaña_orden(j,i,1)
-        # query para crear la orden
 
+        # query para crear la orden
         # se le pasa 1 cuando se acaba de crear, de lo contrario no se le pasa nada
    
     def pestaña_orden(self,j,i, NoOrden=0): # i es el numero de mesa / si no se le pasa el numero, la cuenta ya existe
@@ -273,12 +274,15 @@ class MenuPrincipal(Tk):
         no_orden = self.No_orden_query
 
         Label(self.vent, text="Mesero").place(x=50, y=80)
-        self.text2 = Entry(self.vent,width=10)
-        self.text2.place(x=150, y=80)
+        self.Mesero = Entry(self.vent,width=10)
+        self.Mesero.place(x=150, y=80)
+        Label(self.vent, text="Cantidad de personas").place(x=50, y=110)
+        self.Cantidad_personas = Entry(self.vent,width=10)
+        self.Cantidad_personas.place(x=150, y=110)
       
-        Label(self.vent, text="Orden").place(x=50, y=110)
+        Label(self.vent, text="Orden").place(x=50, y=140)
         self.text3 = Text(self.vent,width=30, height=10)
-        self.text3.place(x=150, y=110)
+        self.text3.place(x=150, y=140)
         # Button(self.vent, text="Añadir a la orden", command=lambda i=self.text1.get():self.añadir_pedido(self.text1.get())).place(x=150, y=320)
         Button(self.vent, text="Guardar Orden", command=lambda No_orden=no_orden:self.guardar_pedido(no_orden)).place(x=300, y=320)
         Button(self.vent, text="Cerrar cuenta", command=lambda  j=j,i=i,ventana = self.vent:self.cerrar_pedido(j,i,self.vent)).place(x=400, y=50)
@@ -338,12 +342,8 @@ class MenuPrincipal(Tk):
         print(f"Elemento Apachado: {idElemento}")
 
     def guardar_pedido(self,No_orden): # se guarda la cuenta
-        self.vent = Toplevel()
-        self.vent.title("Crear orden")
-        self.vent.geometry("500x400")
-        # informacion de orden 
-        # self.pestaña_orden(i)
-        # query para actualizar la orden
+        pedidos.crearPedido(1, self.Mesero.get(), self.Cantidad_personas.get()) # arregar numero de mesa 
+        
 
     def modificar_orden(self,i): # cuando se quiere tomar la orden de un cliente, agregar comidas y bebidas
         # se debe de validar que la cuenta este abierta 

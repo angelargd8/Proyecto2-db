@@ -76,3 +76,32 @@ insert into pago (id_pago,tipo_pago)
 Values
 	(1,'Efectivo'),
 	(2,'Tarjeta');
+
+-- querys para insertar ordenes de prueba
+INSERT INTO orden (id_orden, id_mesa, estado_orden, id_mesero, orden_llegada, cant_personas)
+SELECT 1, 2, 'abierto', 1005, CURRENT_TIMESTAMP, 2
+WHERE EXISTS (
+    SELECT 1
+    FROM mesas
+    WHERE id_mesa = 1
+    AND habilitada = '1'
+	AND capacidad >= 2
+);
+
+UPDATE mesas
+SET habilitada = '0'
+WHERE id_mesa = 1;
+
+INSERT INTO orden (id_orden, id_mesa, estado_orden, id_mesero, orden_llegada, cant_personas)
+SELECT 2, 4, 'abierto', 1005, CURRENT_TIMESTAMP, 2
+WHERE EXISTS (
+    SELECT 1
+    FROM mesas
+    WHERE id_mesa = 2
+    AND habilitada = '1'
+	AND capacidad >= 2
+);
+
+UPDATE mesas
+SET habilitada = '0'
+WHERE id_mesa = 4;
