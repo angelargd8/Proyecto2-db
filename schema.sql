@@ -21,7 +21,8 @@ CREATE TABLE encuesta (
     id_personal INTEGER NOT NULL,
     amabilidad  NUMERIC NOT NULL,
     exactitud   NUMERIC NOT NULL,
-    encuesta_id NUMERIC NOT NULL
+    encuesta_id NUMERIC NOT NULL, 
+    fecha       TIMESTAMP
 );
 
 ALTER TABLE encuesta ADD CONSTRAINT encuesta_pk PRIMARY KEY ( encuesta_id );

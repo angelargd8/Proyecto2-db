@@ -31,10 +31,26 @@ def impresionFactura(id_orden):
     cursor.execute("SELECT * FROM orden WHERE id_orden=%s",(id_orden,))
     orden=cursor.fetchone()
     print(orden)
+
+    """
+    id_orden       INTEGER NOT NULL,
+    id_mesa        INTEGER NOT NULL,
+    total_orden    NUMERIC,
+    estado_orden   VARCHAR(10) NOT NULL,
+    propina        NUMERIC,
+    id_mesero      INTEGER NOT NULL,
+    nit            VARCHAR(50),
+    nombre_nit     VARCHAR(50),
+    direccion      VARCHAR(20),
+    orden_llegada  TIMESTAMP NOT NULL, 
+    orden_salida   TIMESTAMP,
+    cant_personas  INTEGER NOT NULL
+    """
+    
     if orden is not None:
         estado=orden[3]
         #print(orden)
-        #print(estado)
+        print(estado)
         if estado == 'cerrado' or estado == 'cerrada':
             #print("Estado de la orden: ", estado)
             #datos del cliente
