@@ -65,6 +65,13 @@ values
 	(1009, 'Diego', '123', 'barista'),
 	(10010, 'Diega', '123', 'barista');
 
+insert into meseros (id_personal,id_area,id_mesero,tipo)
+values
+	(1005, 1, 1005, 'Meseros'),
+	(1006, 2, 1006, 'Meseros'),
+	(1007, 3, 1007, 'Meseros'),
+	(1008, 4, 1008, 'Meseros');
+
 insert into pago (id_pago,tipo_pago)
 Values
 	(1,'Efectivo'),

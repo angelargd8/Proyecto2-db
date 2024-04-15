@@ -50,9 +50,6 @@ CREATE TABLE menu_orden (
     hora         TIMESTAMP NOT NULL
 );
 
-ALTER TABLE menu_orden ADD CONSTRAINT menu_orden_pk PRIMARY KEY ( id_elemento,
-                                                                  id_orden );
-
 CREATE TABLE mesas (
     id_mesa      INTEGER NOT NULL,
     capacidad    INTEGER NOT NULL,
@@ -94,8 +91,7 @@ CREATE TABLE orden (
     id_mesero      INTEGER NOT NULL,
     nit            VARCHAR(50),
     nombre_nit     VARCHAR(50),
-    direccion      VARCHAR(20),
-    mesas_mesas_id NUMERIC NOT NULL
+    direccion      VARCHAR(20)
 );
 
 ALTER TABLE orden ADD CONSTRAINT orden_pk PRIMARY KEY ( id_orden );
