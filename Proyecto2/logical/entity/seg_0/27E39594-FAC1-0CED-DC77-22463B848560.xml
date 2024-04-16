@@ -37,6 +37,7 @@
 <item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
 <item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
 </engineerTo>
+<nullsAllowed>true</nullsAllowed>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
@@ -107,6 +108,35 @@
 <item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
 </engineerTo>
 <referedAttribute>48FCD841-2297-FF2C-D3FB-D980FA69FC66</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_elemento" id="B9500BA3-ADFA-EDDE-187F-6E819CA03736">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-16 00:15:25 UTC</createdTime>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_elemento1" id="C7000037-7CB3-277D-F692-A54D9317A914">
+<createdBy>Francis</createdBy>
+<createdTime>2024-04-16 00:17:11 UTC</createdTime>
+<generatorID>C46C7D19-CC75-7FFC-FCDD-69D60DBA688C</generatorID>
+<ownerDesignName>Proyecto2</ownerDesignName>
+<engineerTo>
+<item key="AB8242DE-5E07-0517-C255-5A4588711257" value="true"/>
+<item key="898E859B-1958-4815-760F-3AF2E4A81F68" value="true"/>
+</engineerTo>
+<referedAttribute>0C977FB4-77EC-0F38-513E-385A20279C81</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
