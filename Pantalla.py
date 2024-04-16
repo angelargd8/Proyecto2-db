@@ -112,12 +112,6 @@ class Pantallas():
 
 
 
-            
-
-            
-
-
-
     def checkNewItem(self):
         
         self.cursor.execute(f'''SELECT * FROM menu_orden mo

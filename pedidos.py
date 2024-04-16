@@ -228,7 +228,7 @@ def insertarFactura(id_orden,nit,nombre,direccion):
 
 def insertarEncuesta(id_personal, amabilidad, exactitud):
     try:
-        print(id_personal, amabilidad, exactitud    )
+        print("encuesta     ",id_personal, amabilidad, exactitud    )
         resultado = cursor.execute("select count(*) from encuesta")
         resultado = cursor.fetchone()
         print(resultado)
@@ -236,9 +236,9 @@ def insertarEncuesta(id_personal, amabilidad, exactitud):
         hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         cursor.execute("insert into encuesta (id_personal, amabilidad, exactitud, encuesta_id, fecha) values (%s,%s,%s,%s, %s)",(id_personal, amabilidad, exactitud, id_encuesta, hora))
         conexion.commit()
+        print("Encuesta creada")
         return True
     except Exception as msg:
         messagebox.showerror("Error", "No se pudo realizar consulta")
         print(msg)
         return False
-insertarEncuesta(1001, 5, 5)

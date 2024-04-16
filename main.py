@@ -463,7 +463,7 @@ class MenuPrincipal(Tk):
         Label(self.l, text="1 - 5 exactitud").place(x=50, y=110)
         self.ex = Entry(self.l,width=10)
         self.ex.place(x=200, y=110)
-        Button(self.l, text="Enviar",command=lambda:self.enviar).place(x=200, y=140)
+        Button(self.l, text="Enviar",command=lambda:self.enviar()).place(x=200, y=140)
         
     def enviar(self):
         mesero = self.mesero.get()
