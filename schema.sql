@@ -106,8 +106,6 @@ CREATE TABLE orden_pago (
     id_orden  INTEGER NOT NULL
 );
 
-ALTER TABLE orden_pago ADD CONSTRAINT orden_pago_pk PRIMARY KEY ( id_pago,
-                                                                  id_orden );
 
 CREATE TABLE pago (
     id_pago   INTEGER NOT NULL,
