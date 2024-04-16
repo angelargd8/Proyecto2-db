@@ -67,8 +67,12 @@ class Pantallas():
         self.displayItems.append(canvas)
 
     def create_canvas(self, i):
-        x = self.displayItems[-1].winfo_x()
-        y = self.displayItems[-1].winfo_y()
+        if(len(self.displayItems)>1):
+            x = self.displayItems[-1].winfo_x()
+            y = self.displayItems[-1].winfo_y()
+        else:
+            x = -160
+            y = 5
 
         if((x+170) > 850):
             x = 10
