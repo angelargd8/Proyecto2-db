@@ -79,15 +79,15 @@ Values
 
 insert into quejas (motivo,id_queja,fecha,hora,clasificacion,id_elemento)
 values
-	('La comida estaba fea',5,'2024-04-16',4,'comida',1),
-	('Buaj que horrible',8,'2024-04-18',8,'comida',1),
-	('Comida comida',15,'2024-04-11',3,'comida',8);
+	('La comida estaba fea',4,'2024-04-16',4,'comida',1),
+	('Buaj que horrible',5,'2024-04-18',8,'comida',1),
+	('Comida comida',6,'2024-04-11',3,'comida',8);
 
 INSERT INTO quejas(
 	id_personal, motivo, id_queja, fecha, hora, clasificacion)
-VALUES (1005, 'no me gusto que el pollo frito tenga mucha grasa', 1, '11/04/2024', 4, 'comida'),
-(1005, 'el mesero me atendio mal', 2, '18/04/2024', 4, 'servicio'),
-(1006,'El mesero no funciona cambienlo',7,'18/04/2024',5,'servicio');
+VALUES (1005, 'no me gusto que el pollo frito tenga mucha grasa', 1, '2024-04-18', 4, 'comida'),
+(1005, 'el mesero me atendio mal', 2, '04-11-2024', 4, 'servicio'),
+(1006,'El mesero no funciona cambienlo',3,'2024-04-18',5,'servicio');
 
 -- querys para insertar ordenes de prueba
 INSERT INTO orden (id_orden, id_mesa, estado_orden, id_mesero, orden_llegada, cant_personas)
