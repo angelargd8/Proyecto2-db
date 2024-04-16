@@ -10,6 +10,7 @@ from registrar import registrar
 from InicioSesion import iniciarSesion
 from Pantalla import Pantallas
 from PIL import Image, ImageTk
+import pedidos
 from ImpresionFactura import impresionFactura
 #cambios
 from Reporte1y2 import Reporte
