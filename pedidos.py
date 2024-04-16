@@ -242,3 +242,15 @@ def insertarEncuesta(id_personal, amabilidad, exactitud):
         messagebox.showerror("Error", "No se pudo realizar consulta")
         print(msg)
         return False
+
+def obtenerMesasJuntas():
+    try:
+        resultado = cursor.execute("select mesas_juntas from mesas where mesas_juntas is not null")
+        resultado = cursor.fetchall()
+        resultado = [fila[0] for fila in resultado]
+        return resultado
+    except Exception as msg:
+        messagebox.showerror("Error", "No se pudo realizar consulta")
+        return False
+    
+print(obtenerMesasJuntas())

@@ -267,6 +267,11 @@ class MenuPrincipal(Tk):
             self.ordenesactuales[j][i] = ordenes[a][0]
             print(ordenes[a][0], "orden")
         print(self.ordenesactuales)
+        mesasJ = pedidos.obtenerMesasJuntas()
+        for a in mesasJ: 
+            j,i = pedidos.encontrarMesa(self.mesas, a)
+            self.ordenes[j][i].config(text="No disponible")
+            self.ordenesactuales[j][i] = -1
 
 
     def llamar_boton(self, j, i): # valida si la orden ya esta creada o hay que crearla 
@@ -356,6 +361,7 @@ class MenuPrincipal(Tk):
         self.comboBox.place(x=200, y=20)
         self.comboBox.bind("<<ComboboxSelected>>", self.on_select)
         self.mesa2 = ''
+        
         
               
         Button(self.l, text="Juntar",command=lambda j=j, i=i, mesasJuntas=True, mesaJunta=self.mesa2:self.crear_orden(j,i,True,self.mesa2)).place(x=200, y=100)
