@@ -52,12 +52,12 @@ def impresionFactura(id_orden):
         #print(orden)
         print(estado)
         if estado == 'cerrado' or estado == 'cerrada':
-            #print("Estado de la orden: ", estado)
+            print("Estado de la orden: ", estado)
             #datos del cliente
             nit = orden[6]
             nombre_nit = orden[7]
             direccion = orden[8]        
-            #print(nit, nombre_nit, direccion)
+            print(nit, nombre_nit, direccion)
             #formas de pago
             try:
                 cursor.execute('''SELECT orden.id_orden, pago.tipo_pago FROM orden 
@@ -66,16 +66,26 @@ def impresionFactura(id_orden):
                                     ''', (id_orden,))
                 pago= cursor.fetchone()
                 tipo_pago = pago[1]
-                #print(tipo_pago)
+                print(tipo_pago)
             except Exception as e:
-                print("Ocurrió un error:", e)
+                print("Ocurrió un error, falta poner el metodo de pago:", e)
                 print(traceback.format_exc())
                                 
                         
             #total de la orden y que pidio
+            cursor.execute('''SELECT o.id_orden, o.total_orden, m.nombre_elemento, m.precio
+                            FROM orden o
+                            JOIN menu_orden mo ON o.id_orden = mo.id_orden
+                            JOIN menu m ON mo.id_elemento = m.id_elemento
+                            WHERE o.id_orden = %s''', (id_orden,))
+            resultados = cursor.fetchall()
 
-            #return
-            return True, nit, nombre_nit, direccion, tipo_pago
+            total_orden= resultados[0][1]
+           
+            print("total_orden")
+            print(total_orden)
+    
+            return True, nit, nombre_nit, direccion, tipo_pago, total_orden, resultados
 
         else:
             messagebox.showerror("Error", "No se puede imprimir la orden porque sigue abierta")
@@ -83,4 +93,4 @@ def impresionFactura(id_orden):
             messagebox.showerror("Error", "No se puede imprimir la orden porque no existe la orden")
 
 #para probar la funcion xd
-#impresionFactura(2)
+#impresionFactura(4)
