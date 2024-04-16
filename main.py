@@ -1,3 +1,14 @@
+"""
+-------------Proyecto 2 base de datos --------------
+autores:    - Francis Aguilar #22243
+            - Gerardo Pineda #22880
+            - Angela Garcia #22869
+-----------------------------------------------------           
+ATENCION: ESTE ES EL ARCHIVO QUE SE DEBE DE CORRER
+-----------------------------------------------------           
+
+"""
+
 #librerias
 from conexion import conexiones
 import psycopg2
