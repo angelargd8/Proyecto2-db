@@ -2,7 +2,13 @@
 ### Integrantes del proyecto
 - Gerardo Pineda
 - Angela Garcia
-- Francis Aguilar    
+- Francis Aguilar
+
+# Codigo Principal
+
+```diff
+- Main.py
+```
 
 ### Descripcion
 
