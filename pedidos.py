@@ -110,7 +110,7 @@ def ordenEspecifica(orden):
     try:
         resultado = cursor.execute("select id_orden, id_mesa, id_mesero, cant_personas from orden where estado_orden = 'abierto' and id_orden = %s",(orden,))
         resultado = cursor.fetchall()
-        print(resultado)
+        print(resultado, orden)
         return resultado[0]
     except Exception as msg:
         messagebox.showerror("Error", "No se pudo realizar consulta")
@@ -135,6 +135,8 @@ def cerrarCuenta(orden):
         print(resultado)
         if(resultado[4] != None):
             cursor.execute("UPDATE mesas SET habilitada = '1' WHERE id_mesa = %s", (resultado[4],))
+            conexion.commit()
+            cursor.execute("UPDATE mesas SET mesas_juntas = NULL WHERE id_mesa = %s", (resultado[1],))
             conexion.commit()
         cursor.execute("UPDATE mesas SET habilitada = '1' WHERE id_mesa = %s", (resultado[1],))
         conexion.commit()
@@ -210,3 +212,45 @@ def mesasDispo(area,m1):
     except Exception as msg:
         messagebox.showerror("Error", "No se pudo realizar consulta")
         return False
+    
+
+def insertarFactura(id_orden,nit,nombre,direccion):
+    try:
+       
+        cursor.execute("UPDATE orden set total_orden = (SELECT SUM(m.precio) AS total FROM menu AS m JOIN menu_orden AS mo ON m.id_elemento = mo.id_elemento JOIN orden AS o ON o.id_orden = mo.id_orden WHERE o.id_orden = %s), propina = (SELECT  SUM(m.precio) * 0.10 AS propina FROM menu AS m JOIN menu_orden AS mo ON m.id_elemento = mo.id_elemento JOIN orden AS o ON o.id_orden = mo.id_orden WHERE o.id_orden = %s), nit = %s, nombre_nit = %s, direccion = %s where id_orden = %s",((id_orden),id_orden,nit,nombre,direccion,id_orden,))
+        conexion.commit()
+        print("Factura creada", id_orden)
+        return True
+    except Exception as msg:
+        messagebox.showerror("Error", "No se pudo realizar consulta")
+        return False
+
+
+def insertarEncuesta(id_personal, amabilidad, exactitud):
+    try:
+        print("encuesta     ",id_personal, amabilidad, exactitud    )
+        resultado = cursor.execute("select count(*) from encuesta")
+        resultado = cursor.fetchone()
+        print(resultado)
+        id_encuesta = resultado[0] + 1
+        hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        cursor.execute("insert into encuesta (id_personal, amabilidad, exactitud, encuesta_id, fecha) values (%s,%s,%s,%s, %s)",(id_personal, amabilidad, exactitud, id_encuesta, hora))
+        conexion.commit()
+        print("Encuesta creada")
+        return True
+    except Exception as msg:
+        messagebox.showerror("Error", "No se pudo realizar consulta")
+        print(msg)
+        return False
+
+def obtenerMesasJuntas():
+    try:
+        resultado = cursor.execute("select mesas_juntas from mesas where mesas_juntas is not null")
+        resultado = cursor.fetchall()
+        resultado = [fila[0] for fila in resultado]
+        return resultado
+    except Exception as msg:
+        messagebox.showerror("Error", "No se pudo realizar consulta")
+        return False
+    
+print(obtenerMesasJuntas())
