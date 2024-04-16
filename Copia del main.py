@@ -298,11 +298,22 @@ class MenuPrincipal(Tk):
             self.nombre_nit = resultado_impresion[2]
             self.direccion = resultado_impresion[3]
             self.tipo_pago = resultado_impresion[4]
-            self.area_texto.insert(INSERT, "Nit de la orden   : %s \n" % (self.nit))
-            self.area_texto.insert(INSERT, "Nombre del cliente: %s \n" % (self.nombre_nit))
-            self.area_texto.insert(INSERT, "Direccion         : %s \n" % (self.direccion))
-            self.area_texto.insert(INSERT, "Tipo de pago      : %s \n" % (self.tipo_pago))
+            self.total_orden = str(resultado_impresion[5])
+            self.resultados = resultado_impresion[6]
 
+            self.area_texto.insert(INSERT, "------------------- FACTURA ---------------------\n")
+            self.area_texto.insert(INSERT, "- Nit de la orden   : %s \n" % (self.nit))
+            self.area_texto.insert(INSERT, "- Nombre del cliente: %s \n" % (self.nombre_nit))
+            self.area_texto.insert(INSERT, "- Direccion         : %s \n" % (self.direccion))
+            self.area_texto.insert(INSERT, "- Tipo de pago      : %s \n" % (self.tipo_pago))
+            self.area_texto.insert(INSERT, "- Total             :  Q.%s \n" % str(self.total_orden))
+            self.area_texto.insert(INSERT, "-------------------------------------------------------\n")
+            
+            self.area_texto.insert(INSERT, "Orden: \n")
+            for i in range(len(self.resultados)):
+                self.area_texto.insert(INSERT, "** Elemento: %s \n" % str(self.resultados[i][2]))
+                self.area_texto.insert(INSERT, "*   Precio: %s \n" % str(self.resultados[i][3]))
+            self.area_texto.insert(INSERT, "-------------------------------------------------------\n")
             
         else:
             messagebox.showerror("Error", "No se pudo registrar")
