@@ -645,16 +645,62 @@ class MenuPrincipal(Tk):
         pedidos.insertarEncuesta(mesero, amabilidad, ex)
 
 
+    def pagos(self,j,i):
+        self.l = Toplevel()
+        self.l.title("Encuesta")
+        self.l.geometry("500x200")
+        Label(self.l, text="Total").place(x=50, y=50)
+        self.total = Entry(self.l,width=10)
+        self.total.place(x=200, y=50)
+        orden = self.ordenesactuales[j][i]
+        self.total.insert(0, pedidos.totalOrden(orden)) # total orden 
+        Label(self.l, text="1) Efectivo 2) Tarjeta").place(x=50, y=80)
+        Label(self.l, text="Metodo de pago").place(x=50, y=110)
+        self.metodoPago = Entry(self.l,width=10)
+        self.metodoPago.place(x=200, y=110)
+        Button(self.l, text="Hacer pago", command=lambda j=j, i=i: self.hacer_pago(j,i)).place(x=150, y=170)
+        Button(self.l, text="Factura",command=lambda j=j, i=i:self.factura(j,i)).place(x=250, y=170)
+    
+    def hacer_pago(self, j,i):
+        orden = self.ordenesactuales[j][i]
+        total = self.total.get()
+        metodo = self.metodoPago.get()
+        print(metodo, total, orden)
+        pedidos.insertarPago(orden, total, metodo)
+
+    def factura(self,j,i):
+        self.l = Toplevel()
+        self.l.title("Datos Factura")
+        self.l.geometry("500x200")
+        
+        Label(self.l, text="Ingrese el nit").place(x=50, y=50)
+        self.nit = Entry(self.l,width=10)
+        self.nit.place(x=200, y=50)
+        Label(self.l, text="Ingrese el nombre").place(x=50, y=80)
+        self.nombre = Entry(self.l,width=10)
+        self.nombre.place(x=200, y=80)
+        Label(self.l, text="Ingrese la direccion").place(x=50, y=110)
+        self.direccion = Entry(self.l,width=10)
+        self.direccion.place(x=200, y=110)
+        
+        orden = self.ordenesactuales[j][i]
+        self.ordenesactuales[j][i] = 0 # borra la orden de la mesa
+    
+
+        Button(self.l, text="Generar Factura",command=lambda orden = orden, v= self.l:self.encuesta(orden,self.l)).place(x=200, y=170)
+
 
 
     def cerrar_pedido(self,j,i, ventana): # se cierra la cuenta y se genera factura, ya no se pueden hacer modificaciones
         # se modifica la cuenta a cerrada
         pedidos.cerrarCuenta(self.ordenesactuales[j][i])
         self.ordenes[j][i].config(text="Agregar Orden ")
+        self.pagos(j,i)
         ventana.destroy()
-        self.factura(j,i)
+        
         
         self.mainloop()
+
 
 #--------------registro-------------
     def registrar_miembros(self,rol):
