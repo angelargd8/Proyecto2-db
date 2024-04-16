@@ -253,4 +253,31 @@ def obtenerMesasJuntas():
         messagebox.showerror("Error", "No se pudo realizar consulta")
         return False
     
-print(obtenerMesasJuntas())
+def totalOrden(id_orden):
+    try:
+        resultado = cursor.execute("SELECT SUM(m.precio) AS total FROM menu AS m JOIN menu_orden AS mo ON m.id_elemento = mo.id_elemento JOIN orden AS o ON o.id_orden = mo.id_orden WHERE o.id_orden = %s limit 1",(id_orden,))
+        resultado = cursor.fetchone()
+        print(id_orden,resultado[0])
+        return resultado[0]
+    except Exception as msg:
+        messagebox.showerror("Error", "No se pudo realizar ")
+        return False
+    
+
+
+def insertarPago( id_orden,cantidad, tipo):
+    print(id_orden,cantidad, tipo)
+    try:
+        if tipo == "" or id_orden == "" or cantidad =="":
+            messagebox.showerror("error","Rellene todos los campos")
+        else:
+            
+            cursor.execute("insert into orden_pago (id_pago, cantidad, id_orden) values (%s,%s,%s)", (tipo,cantidad, id_orden))
+            conexion.commit()
+            print("insert pago")
+            return True
+    except Exception as msg:
+        messagebox.showerror("Error", "No se pudo ingresar, ingrese bien los datos")
+        print(traceback.format_exc())
+        return False
+    
