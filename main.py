@@ -145,14 +145,18 @@ class MenuPrincipal(Tk):
         if rol == "mesero" or rol == "mesera":
             self.salir()
         elif rol == "cocinero" or rol == "cocinera":
+            self.crear_tab1() # pedidos
             self.salir()
         elif rol == "admin" or rol == "administrador":
-            self.crear_tab1()
+            self.crear_tab1() # pedidos
             self.registrar_miembros(rol)
             self.salir()
-            self.crear_tab4()
+            self.crear_tab4() # impresion de factura
         elif rol == "gerente":
+            self.crear_tab1() # pedidos
+            self.registrar_miembros(rol)
             self.salir()
+            self.crear_tab4() # impresion de factura
         elif rol == "recepcionista":
             self.salir()
         elif rol == "personal":
