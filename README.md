@@ -1,3 +1,3 @@
 # Proyecto2-db
 Diagramas:
-![img](img/Logical.png)
+estan dentro de la carpeta Img
