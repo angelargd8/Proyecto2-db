@@ -259,11 +259,14 @@ class MenuPrincipal(Tk):
        
     def actualizar_ordenes(self): # actualizar con lo que ya esta en la base de datos
         ordenes = pedidos.ordenesActuales()
+        print(ordenes , "ordenes")
         for a in range(len(ordenes)):
             mesa = ordenes[a][1]
             j,i = pedidos.encontrarMesa(self.mesas, mesa)
             self.ordenes[j][i].config(text="Orden "+str(ordenes[a][0]))
             self.ordenesactuales[j][i] = ordenes[a][0]
+            print(ordenes[a][0], "orden")
+        print(self.ordenesactuales)
 
 
     def llamar_boton(self, j, i): # valida si la orden ya esta creada o hay que crearla 
@@ -285,7 +288,7 @@ class MenuPrincipal(Tk):
         print("mesero: ",mesero,", mesa: ", mesa,", personas: ", personas)
 
         if (pedidos.crearPedido(int(mesero), int(mesa), int(personas),mesasJuntas,mesaJunta) ):
-            self.No_orden_query = pedidos.obtenerOrden() + 1
+            self.No_orden_query = pedidos.obtenerOrden() 
             self.ordenesactuales[j][i] = self.No_orden_query
             print(self.ordenesactuales)
             self.ordenes[j][i].config(text="Orden "+str(self.No_orden_query)) # se remplaza por el query
@@ -422,15 +425,62 @@ class MenuPrincipal(Tk):
         self.text3.delete(1.0, END)
         self.text3.insert(INSERT, pedidos.listadoOrden(self.ordenesactuales[j][i]))
    
+    def factura(self,j,i):
+        self.l = Toplevel()
+        self.l.title("Datos Factura")
+        self.l.geometry("500x200")
+        
+        Label(self.l, text="Ingrese el nit").place(x=50, y=50)
+        self.nit = Entry(self.l,width=10)
+        self.nit.place(x=200, y=50)
+        Label(self.l, text="Ingrese el nombre").place(x=50, y=80)
+        self.nombre = Entry(self.l,width=10)
+        self.nombre.place(x=200, y=80)
+        Label(self.l, text="Ingrese la direccion").place(x=50, y=110)
+        self.direccion = Entry(self.l,width=10)
+        self.direccion.place(x=200, y=110)
+        orden = self.ordenesactuales[j][i]
+        self.ordenesactuales[j][i] = 0 # borra la orden de la mesa
+    
 
-       
+        Button(self.l, text="Generar Factura",command=lambda orden = orden, v= self.l:self.encuesta(orden,self.l)).place(x=200, y=140)
+
+
+    def encuesta(self, orden,v):
+        pedidos.insertarFactura(orden, self.nit.get(),self.nombre.get(), self.direccion.get())
+        v.destroy()
+        self.l = Toplevel()
+        self.l.title("Encuesta")
+        self.l.geometry("500x200")
+        
+        Label(self.l, text="Ingrese a su mesero").place(x=50, y=50)
+        self.mesero = Entry(self.l,width=10)
+        self.mesero.place(x=200, y=50)
+        
+        Label(self.l, text="1 - 5 amabilidad").place(x=50, y=80)
+        self.amabilidad = Entry(self.l,width=10)
+        self.amabilidad.place(x=200, y=80)
+        Label(self.l, text="1 - 5 exactitud").place(x=50, y=110)
+        self.ex = Entry(self.l,width=10)
+        self.ex.place(x=200, y=110)
+        Button(self.l, text="Enviar",command=lambda:self.enviar).place(x=200, y=140)
+        
+    def enviar(self):
+        mesero = self.mesero.get()
+        amabilidad = self.amabilidad.get()
+        ex = self.ex.get()
+        print("h0aaa ",mesero, amabilidad, ex)
+        pedidos.insertarEncuesta(mesero, amabilidad, ex)
+
+
+
+
     def cerrar_pedido(self,j,i, ventana): # se cierra la cuenta y se genera factura, ya no se pueden hacer modificaciones
         # se modifica la cuenta a cerrada
         pedidos.cerrarCuenta(self.ordenesactuales[j][i])
-        self.ordenesactuales[j][i] = 0 # borra la orden de la mesa
         self.ordenes[j][i].config(text="Agregar Orden ")
         ventana.destroy()
-    
+        self.factura(j,i)
         
         self.mainloop()
 
