@@ -437,6 +437,9 @@ class MenuPrincipal(Tk):
     def actualizar_ordenes(self): # actualizar con lo que ya esta en la base de datos
         ordenes = pedidos.ordenesActuales()
         print(ordenes , "ordenes")
+        for j in self.ordenes:
+            for i in j:
+                i.config(text="Agregar Orden ")
         for a in range(len(ordenes)):
             mesa = ordenes[a][1]
             j,i = pedidos.encontrarMesa(self.mesas, mesa)
@@ -707,6 +710,7 @@ class MenuPrincipal(Tk):
         pedidos.cerrarCuenta(self.ordenesactuales[j][i])
         self.ordenes[j][i].config(text="Agregar Orden ")
         self.pagos(j,i)
+        self.actualizar_ordenes()
         ventana.destroy()
         
         
