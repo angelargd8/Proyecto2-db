@@ -213,7 +213,15 @@ class MenuPrincipal(Tk):
     def mostrar_objetos(self, rol):
         if rol == "mesero" or rol == "mesera":
             self.salir()
+            self.crear_tab1()
+            self.crear_tab4()
+            self.crear_tab5()
+            
         elif rol == "cocinero" or rol == "cocinera":
+            self.crear_tab1()
+            self.crear_tab4()
+            self.crear_tab5()
+            
             self.salir()
         elif rol == "admin" or rol == "administrador":
             self.crear_tab1()
@@ -230,8 +238,13 @@ class MenuPrincipal(Tk):
             self.crear_tab5()
             self.crear_tab6()
         elif rol == "recepcionista":
+            self.crear_tab1()
+            self.crear_tab4()
+            self.crear_tab5()
+            self.crear_tab6()
             self.salir()
         elif rol == "personal":
+            self.crear_tab6()
             self.salir()
 
 #cambios
